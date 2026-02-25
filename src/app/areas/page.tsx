@@ -7,7 +7,7 @@ import { SchemaMarkup } from "@/components/SchemaMarkup";
 import { generateBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: `Service Areas \u2014 Eastern Washington & Northern Idaho`,
+  title: `Service Areas — Eastern Washington & Northern Idaho`,
   description: `${business.shortName} serves ${cities.length}+ communities across Eastern Washington and Northern Idaho. Find ${business.category.toLowerCase()} services near you.`,
 };
 
@@ -18,10 +18,10 @@ export default function AreasPage() {
   const CityCard = ({ city }: { city: (typeof cities)[number] }) => (
     <Link
       href={`/areas/${city.slug}`}
-      className="group bg-white rounded-xl p-5 border border-gray-100 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-600/5 transition-all"
+      className="group bg-white rounded-xl p-5 border-2 border-gray-100 hover:border-blue-600 hover:shadow-lg hover:shadow-blue-600/5 transition-all hover:-translate-y-0.5"
     >
       <div className="flex items-center justify-between mb-1">
-        <span className="font-bold group-hover:text-orange-600 transition-colors">
+        <span className="font-bold group-hover:text-blue-600 transition-colors">
           {city.name}
         </span>
         <span className="text-xs text-gray-400 font-medium">{city.stateAbbr}</span>
@@ -30,7 +30,7 @@ export default function AreasPage() {
         {city.zip.join(", ")} &middot; {city.population.toLocaleString()} pop.
       </div>
       {city.priority === "high" && (
-        <span className="inline-block mt-2.5 text-[10px] font-semibold uppercase tracking-wider bg-orange-50 text-orange-600 px-2.5 py-1 rounded-full">
+        <span className="inline-block mt-2.5 text-[10px] font-bold uppercase tracking-wider bg-blue-50 text-blue-600 px-2.5 py-1 rounded-full">
           Major area
         </span>
       )}
@@ -46,29 +46,29 @@ export default function AreasPage() {
         ])}
       />
 
-      <section className="relative bg-gray-950 text-white pt-12 pb-20 overflow-hidden">
-        <div className="absolute inset-0 grid-pattern" />
+      <section className="hero-concrete diagonal-cut relative text-white pt-12 pb-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-transparent to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <p className="text-orange-500 font-semibold text-sm uppercase tracking-wider mb-2">Coverage</p>
+          <p className="text-blue-400 font-bold text-sm uppercase tracking-[0.2em] mb-3">Coverage</p>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4">Service Areas</h1>
-          <p className="text-lg text-gray-400 max-w-2xl leading-relaxed">
+          <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
             Professional {business.category.toLowerCase()} services
             across {cities.length}+ communities in Eastern Washington and Northern Idaho.
           </p>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 h-16 bg-white" style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }} />
       </section>
 
       {/* Washington */}
-      <section className="py-20">
+      <section className="py-20 -mt-10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="bg-orange-600/10 text-orange-600 px-2.5 py-0.5 rounded font-mono text-xs font-bold">WA</span>
-            <p className="text-orange-600 font-semibold text-sm uppercase tracking-wider">Eastern Washington</p>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">WA</span>
+            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Eastern Washington</p>
           </div>
-          <p className="text-gray-500 mb-8">
+          <p className="text-gray-500 mb-2">
             {waCities.length} communities served &middot; License #{business.licenses.wa}
           </p>
+          <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {waCities
               .sort((a, b) => b.population - a.population)
@@ -80,15 +80,16 @@ export default function AreasPage() {
       </section>
 
       {/* Idaho */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 concrete-texture">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center gap-3 mb-2">
-            <span className="bg-orange-600/10 text-orange-600 px-2.5 py-0.5 rounded font-mono text-xs font-bold">ID</span>
-            <p className="text-orange-600 font-semibold text-sm uppercase tracking-wider">Northern Idaho</p>
+          <div className="flex items-center gap-3 mb-3">
+            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">ID</span>
+            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Northern Idaho</p>
           </div>
-          <p className="text-gray-500 mb-8">
+          <p className="text-gray-500 mb-2">
             {idCities.length} communities served &middot; License #{business.licenses.id}
           </p>
+          <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {idCities
               .sort((a, b) => b.population - a.population)
