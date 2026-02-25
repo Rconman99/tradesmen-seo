@@ -10,7 +10,7 @@ export function FAQSection({ city }: FAQSectionProps) {
   const faqs = [
     {
       q: `How much does ${serviceName} cost in ${city.name}?`,
-      a: `${business.category} costs in ${city.name}, ${city.stateAbbr} vary depending on the project scope, material thickness, and access conditions. Contact us at ${business.phone} for a free on-site estimate — we'll give you an accurate quote before any work begins.`,
+      a: `${business.category} costs in ${city.name}, ${city.stateAbbr} vary depending on the project scope, material thickness, and access conditions. Contact us at ${business.phone} for a free on-site estimate \u2014 we\u2019ll give you an accurate quote before any work begins.`,
     },
     {
       q: `Do you offer free estimates in ${city.name}?`,
@@ -30,23 +30,34 @@ export function FAQSection({ city }: FAQSectionProps) {
     },
     {
       q: `How quickly can you start a project in ${city.name}?`,
-      a: `We typically schedule projects within 3-5 business days. For emergency or urgent needs in ${city.name}, call us directly at ${business.phone} and we'll do our best to accommodate your timeline.`,
+      a: `We typically schedule projects within 3\u20135 business days. For emergency or urgent needs in ${city.name}, call us directly at ${business.phone} and we\u2019ll do our best to accommodate your timeline.`,
     },
   ];
 
   return (
-    <section className="py-16 bg-slate-50">
-      <div className="max-w-4xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-slate-900 mb-8 text-center">
-          Frequently Asked Questions — {city.name}, {city.stateAbbr}
-        </h2>
-        <div className="space-y-6">
+    <section className="py-20 bg-gray-50">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6">
+        <div className="text-center mb-12">
+          <p className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-2">
+            FAQ
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+            Common Questions \u2014 {city.name}
+          </h2>
+        </div>
+        <div className="space-y-4">
           {faqs.map((faq, i) => (
-            <div key={i} className="bg-white rounded-lg p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-slate-900 mb-2">
+            <div
+              key={i}
+              className="bg-white rounded-2xl p-6 border border-gray-100 hover:border-orange-200 transition-colors"
+            >
+              <h3 className="text-lg font-bold text-gray-900 mb-2 flex items-start gap-3">
+                <span className="text-orange-600 font-black text-sm bg-orange-50 rounded-lg w-8 h-8 flex items-center justify-center shrink-0 mt-0.5">
+                  Q
+                </span>
                 {faq.q}
               </h3>
-              <p className="text-slate-600">{faq.a}</p>
+              <p className="text-gray-600 ml-11 leading-relaxed">{faq.a}</p>
             </div>
           ))}
         </div>

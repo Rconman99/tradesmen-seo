@@ -2,10 +2,61 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0f172a;
+  --foreground: #111827;
+  --brand-orange: #EA580C;
+  --brand-dark: #111827;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+}
+
+/* Diagonal cut accent — brand motif */
+.cut-line {
+  position: relative;
+}
+.cut-line::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to bottom right, transparent 49.5%, white 50%);
+  pointer-events: none;
+}
+.cut-line-dark::after {
+  background: linear-gradient(to bottom right, transparent 49.5%, #111827 50%);
+}
+
+/* Concrete texture overlay */
+.concrete-bg {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.03) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(255,255,255,0.02) 0%, transparent 50%);
+}
+
+/* Subtle grid pattern for hero sections */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Glow effect for accent elements */
+.glow-orange {
+  box-shadow: 0 0 30px rgba(234, 88, 12, 0.15);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Better focus styles */
+*:focus-visible {
+  outline: 2px solid var(--brand-orange);
+  outline-offset: 2px;
 }
