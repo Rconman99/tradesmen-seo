@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { business } from "@/config/business";
 import { services } from "@/config/services";
@@ -15,111 +16,122 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="relative bg-gray-950 text-white pt-16 pb-24 md:pt-24 md:pb-36 overflow-hidden">
-        <div className="absolute inset-0 grid-pattern" />
-        <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-orange-600/10 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 left-20 w-[300px] h-[300px] bg-orange-600/5 rounded-full blur-[80px]" />
+      {/* ====== HERO ====== */}
+      <section className="hero-concrete diagonal-cut relative text-white pt-20 pb-36 md:pt-28 md:pb-48 overflow-hidden">
+        {/* Decorative saw blade */}
+        <div className="absolute -right-32 -top-32 w-96 h-96 opacity-[0.04]">
+          <svg viewBox="0 0 200 200" className="w-full h-full spin-slow">
+            <circle cx="100" cy="100" r="80" fill="none" stroke="white" strokeWidth="2" strokeDasharray="8 6" />
+            <circle cx="100" cy="100" r="60" fill="none" stroke="white" strokeWidth="1" />
+            <circle cx="100" cy="100" r="20" fill="white" fillOpacity="0.3" />
+            {Array.from({ length: 24 }).map((_, i) => (
+              <line
+                key={i}
+                x1="100"
+                y1="20"
+                x2="100"
+                y2="0"
+                stroke="white"
+                strokeWidth="3"
+                transform={`rotate(${i * 15} 100 100)`}
+              />
+            ))}
+          </svg>
+        </div>
+
+        {/* Blue gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/40 via-transparent to-transparent" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 rounded-full px-4 py-1.5 mb-8">
-              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-              <span className="text-gray-300 text-sm">
-                Now booking projects across Eastern WA &amp; Northern ID
-              </span>
-            </div>
+            {/* Logo featured in hero */}
+            <Image
+              src="/logo.webp"
+              alt={`${business.name} logo`}
+              width={500}
+              height={180}
+              className="h-28 sm:h-36 md:h-44 w-auto mb-8"
+              priority
+            />
 
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-black leading-[0.9] tracking-tight mb-6">
-              Precision{" "}
-              <span className="text-orange-500">Concrete Cutting</span>
+            <h1 className="text-5xl sm:text-6xl md:text-8xl font-black leading-[0.85] tracking-tight mb-8">
+              Your Local
               <br />
-              <span className="text-gray-500">Done Right.</span>
+              <span className="text-gradient">Saw &amp; Drilling</span>
+              <br />
+              Company
             </h1>
 
-            <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed">
-              {business.description}
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl leading-relaxed font-light">
+              Precision concrete cutting, core drilling, and removal for Eastern
+              Washington &amp; Northern Idaho since {business.founded}.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
-              <a
-                href={`tel:${business.phoneTel}`}
-                className="bg-orange-600 text-white px-8 py-4 rounded-xl font-bold text-lg text-center hover:bg-orange-500 transition-all shadow-xl shadow-orange-600/25 flex items-center justify-center gap-2"
-              >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-                </svg>
-                {business.phone}
-              </a>
+            <div className="flex flex-col sm:flex-row gap-4 mb-14">
               <Link
                 href="/contact"
-                className="bg-white/5 backdrop-blur border border-white/10 text-white px-8 py-4 rounded-xl font-bold text-lg text-center hover:bg-white/10 transition-all"
+                className="bg-blue-600 text-white px-10 py-5 rounded-full font-bold text-lg text-center hover:bg-blue-700 transition-all shadow-2xl shadow-blue-600/30 hover:shadow-blue-600/50 hover:scale-105"
               >
-                Get a Free Quote
+                Book Online
               </Link>
+              <a
+                href={`tel:${business.phoneTel}`}
+                className="bg-orange-500 text-white px-10 py-5 rounded-full font-bold text-lg text-center hover:bg-orange-600 transition-all shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105"
+              >
+                Request a Bid
+              </a>
             </div>
 
-            {/* Stats bar */}
-            <div className="flex flex-wrap gap-x-8 gap-y-4">
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-6 max-w-lg">
               {[
-                { value: `${business.stats.yearsExperience}+`, label: "Years" },
-                {
-                  value: `${business.stats.projectsCompleted.toLocaleString()}+`,
-                  label: "Projects",
-                },
-                {
-                  value: `${business.stats.reviewAverage}`,
-                  label: `★ (${business.stats.reviewCount} reviews)`,
-                },
+                { value: `${business.stats.yearsExperience}+`, label: "Years Experience" },
+                { value: `${(business.stats.projectsCompleted / 1000).toFixed(1)}K+`, label: "Projects Done" },
+                { value: `${business.stats.reviewAverage}`, label: "Star Rating" },
               ].map((stat) => (
-                <div key={stat.label} className="flex items-baseline gap-2">
-                  <span className="text-2xl md:text-3xl font-black text-white">
-                    {stat.value}
-                  </span>
-                  <span className="text-sm text-gray-500 font-medium">
+                <div key={stat.label}>
+                  <div className="text-3xl md:text-4xl font-black text-white">{stat.value}</div>
+                  <div className="text-xs text-gray-400 uppercase tracking-wider mt-1 font-semibold">
                     {stat.label}
-                  </span>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-
-        {/* Diagonal cut */}
-        <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-br from-transparent via-transparent to-white" style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }} />
       </section>
 
-      {/* Services */}
-      <section className="py-20 md:py-28">
+      {/* ====== SERVICES ====== */}
+      <section className="py-20 md:py-28 -mt-10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <p className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-2">
+            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em] mb-3">
               What We Do
             </p>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight">
               Our Services
             </h2>
+            <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto mt-4" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => (
               <Link
                 key={service.slug}
                 href={`/services/${service.slug}`}
-                className="group relative bg-white rounded-2xl p-8 border border-gray-100 hover:border-orange-200 hover:shadow-xl hover:shadow-orange-600/5 transition-all"
+                className="group relative bg-white rounded-2xl p-8 border-2 border-gray-100 hover:border-blue-600 transition-all hover:shadow-2xl hover:shadow-blue-600/10 hover:-translate-y-1"
               >
-                <div className="w-14 h-14 bg-orange-50 rounded-xl flex items-center justify-center text-3xl mb-5 group-hover:bg-orange-100 transition-colors">
-                  {service.icon}
+                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-all group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-blue-600/30">
+                  <span className="group-hover:scale-110 transition-transform">{service.icon}</span>
                 </div>
-                <h3 className="text-xl font-bold mb-2 group-hover:text-orange-600 transition-colors">
+                <h3 className="text-xl font-bold mb-2 group-hover:text-blue-600 transition-colors">
                   {service.name}
                 </h3>
                 <p className="text-gray-500 text-sm leading-relaxed">
                   {service.description}
                 </p>
-                <div className="mt-4 text-orange-600 text-sm font-semibold flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Learn more
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+                <div className="absolute bottom-8 right-8 w-10 h-10 bg-gray-50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all group-hover:bg-blue-600">
+                  <svg className="w-5 h-5 text-gray-400 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </div>
               </Link>
@@ -128,114 +140,110 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="py-20 bg-gray-950 text-white relative overflow-hidden">
-        <div className="absolute inset-0 concrete-bg" />
+      {/* ====== WHY CHOOSE US ====== */}
+      <section className="hero-concrete diagonal-cut py-24 md:py-32 text-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="text-center mb-16">
-            <p className="text-orange-500 font-semibold text-sm uppercase tracking-wider mb-2">
-              Why Us
+            <p className="text-blue-400 font-bold text-sm uppercase tracking-[0.2em] mb-3">
+              Why Choose Us
             </p>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
-              Built on Trust
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight">
+              Built Different
             </h2>
+            <div className="w-16 h-1 bg-orange-500 rounded-full mx-auto mt-4" />
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: (
-                  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                  </svg>
-                ),
+                icon: "🛡️",
                 title: "Licensed & Insured",
-                desc: `WA #${business.licenses.wa} \u00B7 ID #${business.licenses.id}`,
+                desc: `WA #${business.licenses.wa} · ID #${business.licenses.id}. Fully bonded and insured for your protection.`,
+                color: "blue",
               },
               {
-                icon: (
-                  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                ),
+                icon: "💰",
                 title: "Free Estimates",
-                desc: "No surprises. No hidden fees. Ever.",
+                desc: "No surprises, no hidden fees. We quote it right the first time, every time.",
+                color: "green",
               },
               {
-                icon: (
-                  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.42 15.17l-5.1-5.1m0 0L12 4.37m-5.68 5.7h11.36M4.26 19.67A10 10 0 1119.74 4.33 10 10 0 014.26 19.67z" />
-                  </svg>
-                ),
+                icon: "⚡",
                 title: `${business.stats.yearsExperience}+ Years`,
-                desc: `Serving the region since ${business.founded}.`,
+                desc: `Trusted since ${business.founded}. Thousands of projects completed across the region.`,
+                color: "orange",
               },
               {
-                icon: (
-                  <svg className="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
-                  </svg>
-                ),
-                title: `${business.stats.reviewAverage} ★ Rating`,
-                desc: `${business.stats.reviewCount}+ verified customer reviews.`,
+                icon: "⭐",
+                title: `${business.stats.reviewAverage} Star Rating`,
+                desc: `${business.stats.reviewCount}+ verified reviews from real customers. Results speak for themselves.`,
+                color: "yellow",
               },
             ].map((item) => (
               <div
                 key={item.title}
-                className="bg-white/5 backdrop-blur border border-white/5 rounded-2xl p-6 hover:border-orange-500/20 transition-colors"
+                className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center hover:bg-white/10 hover:border-white/20 transition-all hover:-translate-y-1"
               >
-                <div className="text-orange-500 mb-4">{item.icon}</div>
-                <h3 className="text-lg font-bold mb-1">{item.title}</h3>
-                <p className="text-gray-400 text-sm">{item.desc}</p>
+                <div className="text-5xl mb-5">{item.icon}</div>
+                <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Service Areas */}
-      <section className="py-20 md:py-28">
+      {/* ====== SERVICE AREAS ====== */}
+      <section className="py-20 md:py-28 -mt-10 relative z-10 concrete-texture">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <p className="text-orange-600 font-semibold text-sm uppercase tracking-wider mb-2">
-              Coverage Area
+            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em] mb-3">
+              Our Coverage
             </p>
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight">
               Serving {cities.length}+ Communities
             </h2>
-            <p className="text-gray-500 mt-3 max-w-xl mx-auto">
-              From Spokane to the Tri-Cities, Coeur d&apos;Alene to Yakima \u2014 we cover
-              Eastern Washington and Northern Idaho.
+            <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto mt-4" />
+            <p className="text-gray-500 mt-4 max-w-xl mx-auto">
+              From Spokane to the Tri-Cities, Coeur d&apos;Alene to Yakima &mdash;
+              we cover Eastern Washington and Northern Idaho.
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
             {highPriorityCities.map((city) => (
               <Link
                 key={city.slug}
                 href={`/areas/${city.slug}`}
-                className="group bg-white rounded-xl p-5 border border-gray-100 hover:border-orange-200 hover:shadow-lg hover:shadow-orange-600/5 transition-all"
+                className="group relative bg-white rounded-2xl p-6 border-2 border-gray-100 hover:border-blue-600 transition-all hover:shadow-xl hover:-translate-y-0.5 overflow-hidden"
               >
-                <div className="flex items-center justify-between mb-1">
-                  <span className="font-bold group-hover:text-orange-600 transition-colors">
-                    {city.name}
-                  </span>
-                  <span className="text-xs text-gray-400 font-medium">
+                <div className="absolute top-0 right-0 w-20 h-20 bg-blue-600/5 rounded-bl-[40px] group-hover:bg-blue-600/10 transition-colors" />
+                <div className="flex items-start justify-between">
+                  <div>
+                    <h3 className="text-xl font-bold group-hover:text-blue-600 transition-colors">
+                      {city.name}
+                    </h3>
+                    <p className="text-gray-400 text-sm mt-1">
+                      {city.county} County, {city.stateAbbr}
+                    </p>
+                  </div>
+                  <span className="bg-blue-600 text-white text-xs font-bold px-3 py-1 rounded-full">
                     {city.stateAbbr}
                   </span>
                 </div>
-                <p className="text-xs text-gray-400">
-                  {city.zip.slice(0, 3).join(", ")}
-                  {city.zip.length > 3 ? ` +${city.zip.length - 3} more` : ""}
+                <p className="text-xs text-gray-400 mt-3">
+                  ZIP: {city.zip.slice(0, 3).join(", ")}
+                  {city.zip.length > 3 && ` +${city.zip.length - 3}`}
                 </p>
               </Link>
             ))}
           </div>
-          <div className="text-center mt-10">
+          <div className="text-center mt-12">
             <Link
               href="/areas"
-              className="inline-flex items-center gap-2 text-orange-600 font-semibold hover:text-orange-700 transition-colors"
+              className="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-full font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20 hover:shadow-blue-600/40 hover:scale-105"
             >
-              View all {cities.length} service areas
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              View All {cities.length} Service Areas
+              <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
             </Link>
