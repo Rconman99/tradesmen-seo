@@ -2,8 +2,10 @@ import type { MetadataRoute } from "next";
 import { business } from "@/config/business";
 import { cities } from "@/config/cities";
 import { services } from "@/config/services";
+import { sanityFetch } from "@/sanity/lib/client";
+import { POST_SLUGS_QUERY } from "@/sanity/lib/queries";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = business.website;
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -13,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/reviews`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
   ];
 
   const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
@@ -38,5 +41,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }))
   );
 
-  return [...staticPages, ...servicePages, ...cityPages, ...cityServicePages];
+  // Blog post pages from Sanity
+  const postSlugs = await sanityFetch<string[]>({
+    query: POST_SLUGS_QUERY,
+    tags: ["post"],
+  });
+
+  const blogPages: MetadataRoute.Sitemap = postSlugs.map((slug) => ({
+    url: `${baseUrl}/blog/${slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.6,
+  }));
+
+  return [...staticPages, ...servicePages, ...cityPages, ...cityServicePages, ...blogPages];
 }

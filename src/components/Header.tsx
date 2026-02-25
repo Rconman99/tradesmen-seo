@@ -53,6 +53,7 @@ export function Header() {
                 { href: "/services", label: "Our Services" },
                 { href: "/areas", label: "Service Areas" },
                 { href: "/reviews", label: "Reviews" },
+                { href: "/blog", label: "Blog" },
                 { href: "/contact", label: "Contact Us" },
               ].map((link) => (
                 <Link

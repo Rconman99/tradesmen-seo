@@ -5,14 +5,21 @@ import { business } from "@/config/business";
 import { services } from "@/config/services";
 import { cities, getCitiesByPriority } from "@/config/cities";
 import { CTASection } from "@/components/CTASection";
+import { sanityFetch } from "@/sanity/lib/client";
+import { FEATURED_TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
+import type { SanityTestimonial } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: `${business.shortName} | ${business.tagline} in Eastern WA & Northern ID`,
   description: business.description,
 };
 
-export default function HomePage() {
+export default async function HomePage() {
   const highPriorityCities = getCitiesByPriority("high");
+  const featuredTestimonials = await sanityFetch<SanityTestimonial[]>({
+    query: FEATURED_TESTIMONIALS_QUERY,
+    tags: ["testimonial"],
+  });
 
   return (
     <>
@@ -192,6 +199,63 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ====== FEATURED TESTIMONIALS ====== */}
+      {featuredTestimonials.length > 0 && (
+        <section className="py-20 md:py-28 -mt-10 relative z-10">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-16">
+              <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em] mb-3">
+                What Our Clients Say
+              </p>
+              <h2 className="text-4xl md:text-5xl font-black tracking-tight">
+                Customer Reviews
+              </h2>
+              <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto mt-4" />
+            </div>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {featuredTestimonials.map((t) => (
+                <div
+                  key={t._id}
+                  className="bg-white rounded-2xl p-8 border-2 border-gray-100 hover:border-blue-200 transition-colors"
+                >
+                  <div className="flex text-orange-400 mb-4">
+                    {"★".repeat(t.rating || 5)}
+                    {"☆".repeat(5 - (t.rating || 5))}
+                  </div>
+                  <p className="text-gray-600 leading-relaxed mb-6">
+                    &ldquo;{t.text}&rdquo;
+                  </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                      {t.name?.[0] || "?"}
+                    </div>
+                    <div>
+                      <span className="font-bold text-sm">{t.name}</span>
+                      {t.location && (
+                        <span className="text-gray-400 text-sm ml-2">
+                          {t.location}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <Link
+                href="/reviews"
+                className="inline-flex items-center gap-2 text-blue-600 font-bold hover:text-blue-700 transition-colors"
+              >
+                See All Reviews
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ====== SERVICE AREAS ====== */}
       <section className="py-20 md:py-28 -mt-10 relative z-10 concrete-texture">

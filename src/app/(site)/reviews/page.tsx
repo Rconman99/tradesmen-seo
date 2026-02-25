@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
 import { business } from "@/config/business";
 import { CTASection } from "@/components/CTASection";
+import { sanityFetch } from "@/sanity/lib/client";
+import { TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
+import type { SanityTestimonial } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: `Reviews — ${business.stats.reviewAverage} Star Rating`,
   description: `Read what our customers say about ${business.shortName}. ${business.stats.reviewCount}+ verified reviews with a ${business.stats.reviewAverage}-star average.`,
 };
 
-// Placeholder reviews — replace with real reviews or pull from Google API
-const reviews = [
+// Fallback reviews — used when Sanity has no testimonials yet
+const fallbackReviews = [
   {
     name: "Mike R.",
     location: "Spokane, WA",
@@ -53,7 +56,29 @@ const reviews = [
   },
 ];
 
-export default function ReviewsPage() {
+export default async function ReviewsPage() {
+  const sanityTestimonials = await sanityFetch<SanityTestimonial[]>({
+    query: TESTIMONIALS_QUERY,
+    tags: ["testimonial"],
+  });
+
+  const reviews =
+    sanityTestimonials.length > 0
+      ? sanityTestimonials.map((t) => ({
+          name: t.name || "",
+          location: t.location || "",
+          rating: t.rating || 5,
+          text: t.text || "",
+          date: t.date
+            ? new Date(t.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            : "",
+        }))
+      : fallbackReviews;
+
   return (
     <>
       <section className="hero-concrete diagonal-cut relative text-white pt-12 pb-32 overflow-hidden">
