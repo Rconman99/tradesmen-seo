@@ -159,6 +159,86 @@ export function generateCityFAQSchema(city: City) {
   };
 }
 
+export function generateCityServiceDetailSchema(city: City, service: Service) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `${service.name} in ${city.name}, ${city.stateAbbr}`,
+    description: `Professional ${service.name.toLowerCase()} services in ${city.name}, ${city.stateAbbr}. ${service.description}`,
+    serviceType: service.name,
+    provider: {
+      "@type": "LocalBusiness",
+      "@id": `${business.website}/#business`,
+      name: business.name,
+      telephone: business.phoneTel,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: city.name,
+        addressRegion: city.stateAbbr,
+        postalCode: city.zip[0],
+      },
+    },
+    areaServed: {
+      "@type": "City",
+      name: city.name,
+      containedInPlace: {
+        "@type": "State",
+        name: city.state,
+      },
+    },
+  };
+}
+
+export function generateCityServiceFAQSchema(city: City, service: Service) {
+  const svc = service.name.toLowerCase();
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `How much does ${svc} cost in ${city.name}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${service.name} costs in ${city.name}, ${city.stateAbbr} depend on project size, concrete thickness, and access conditions. Contact ${business.shortName} at ${business.phone} for a free on-site estimate.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `How long does a ${svc} project take in ${city.name}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Most ${svc} projects in ${city.name} are completed in one day. Larger commercial jobs may take 2-3 days. We'll provide a timeline with your free estimate.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Do you need a permit for ${svc} in ${city.name}, ${city.stateAbbr}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Permit requirements for ${svc} in ${city.name} vary by project scope. ${business.shortName} is fully licensed in ${city.state} (${city.stateAbbr === "WA" ? `License #${business.licenses.wa}` : `License #${business.licenses.id}`}) and can advise on permits for your specific project.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Is ${business.shortName} licensed for ${svc} in ${city.state}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Yes. ${business.shortName} is fully licensed and insured for ${svc} in ${city.state}. ${city.stateAbbr === "WA" ? `WA License #${business.licenses.wa}` : `ID License #${business.licenses.id}`}. We carry full liability insurance on every job.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Do you offer free ${svc} estimates in ${city.name}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Absolutely. ${business.shortName} provides free on-site estimates for all ${svc} projects in ${city.name} and surrounding areas in ${city.county} County. Call ${business.phone} or book online.`,
+        },
+      },
+    ],
+  };
+}
+
 export function generateBreadcrumbSchema(
   items: { name: string; url: string }[]
 ) {
