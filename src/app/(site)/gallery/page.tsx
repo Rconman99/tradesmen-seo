@@ -10,7 +10,7 @@ import type { SanityGalleryImage } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "Project Gallery",
-  description: `Browse completed projects from ${business.shortName}. See our concrete cutting, core drilling, and demolition work across Eastern Washington and Northern Idaho.`,
+  description: `Browse completed projects from ${business.shortName}. See our roofing, storm damage repair, and maintenance work across Utah and Texas.`,
 };
 
 export default async function GalleryPage() {
@@ -36,8 +36,7 @@ export default async function GalleryPage() {
             Project Gallery
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-            Browse our completed projects across Eastern Washington and Northern
-            Idaho.
+            Browse our completed projects across Utah and Texas.
           </p>
         </div>
       </section>

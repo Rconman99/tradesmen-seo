@@ -22,7 +22,7 @@ export function Footer() {
               className="h-16 w-auto mb-4"
             />
             <p className="text-sm leading-relaxed mb-5">
-              {business.tagline}. Serving Eastern Washington and Northern Idaho.
+              {business.tagline}. Serving Utah and Texas.
             </p>
             <a
               href={`tel:${business.phoneTel}`}
@@ -106,12 +106,12 @@ export function Footer() {
             </ul>
             <div className="space-y-2 text-xs">
               <div className="flex items-center gap-2">
-                <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold">WA</span>
-                <span>{business.licenses.wa}</span>
+                <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold">UT</span>
+                <span>{business.licenses.ut}</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold">ID</span>
-                <span>{business.licenses.id}</span>
+                <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold">TX</span>
+                <span>{business.licenses.tx}</span>
               </div>
             </div>
           </div>

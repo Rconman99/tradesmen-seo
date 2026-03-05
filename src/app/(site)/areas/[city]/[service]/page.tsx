@@ -221,9 +221,9 @@ export default async function CityServicePage({
                     {
                       label: `${city.stateAbbr} License`,
                       value:
-                        city.stateAbbr === "WA"
-                          ? business.licenses.wa
-                          : business.licenses.id,
+                        city.stateAbbr === "UT"
+                          ? business.licenses.ut
+                          : business.licenses.tx,
                     },
                   ].map((row) => (
                     <li

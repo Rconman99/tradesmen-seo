@@ -6,7 +6,7 @@ export function FAQSection({ city }: { city: City }) {
   const faqs = [
     {
       q: `How much does ${serviceName} cost in ${city.name}?`,
-      a: `Costs in ${city.name}, ${city.stateAbbr} vary by project scope, material thickness, and access. Call ${business.phone} for a free on-site estimate.`,
+      a: `Costs in ${city.name}, ${city.stateAbbr} vary by roof size, materials, and project scope. Call ${business.phone} for a free inspection and estimate.`,
     },
     {
       q: `Do you offer free estimates in ${city.name}?`,
@@ -14,15 +14,19 @@ export function FAQSection({ city }: { city: City }) {
     },
     {
       q: `Are you licensed in ${city.state}?`,
-      a: `Fully licensed and insured. ${city.stateAbbr === "WA" ? `WA License #${business.licenses.wa}` : `ID License #${business.licenses.id}`}.`,
+      a: `Fully licensed and insured. ${city.stateAbbr === "UT" ? `UT License #${business.licenses.ut}` : `TX License #${business.licenses.tx}`}.`,
     },
     {
       q: `What areas near ${city.name} do you serve?`,
       a: `We serve ${city.name} and all surrounding ${city.county} County communities. Contact us to confirm availability.`,
     },
     {
+      q: `Do you help with insurance claims in ${city.name}?`,
+      a: `Yes! We have extensive experience with insurance claims for hail and wind damage. We document damage, meet with adjusters, and guide you through the entire process.`,
+    },
+    {
       q: `How fast can you start?`,
-      a: `Typically 3\u20135 business days. For urgent needs in ${city.name}, call ${business.phone} directly.`,
+      a: `Typically 3\u20135 business days. For storm damage emergencies in ${city.name}, call ${business.phone} for same-day response.`,
     },
   ];
 

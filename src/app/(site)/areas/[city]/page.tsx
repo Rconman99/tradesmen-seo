@@ -140,7 +140,7 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                     { label: "Zip Code(s)", value: city.zip.join(", ") },
                     { label: "County", value: city.county },
                     { label: "State", value: city.state },
-                    { label: `${city.stateAbbr} License`, value: city.stateAbbr === "WA" ? business.licenses.wa : business.licenses.id },
+                    { label: `${city.stateAbbr} License`, value: city.stateAbbr === "UT" ? business.licenses.ut : business.licenses.tx },
                   ].map((row) => (
                     <li key={row.label} className="flex justify-between items-center pb-4 border-b border-gray-100 last:border-0 last:pb-0">
                       <span className="text-gray-400">{row.label}</span>

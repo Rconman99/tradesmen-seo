@@ -7,13 +7,13 @@ import { SchemaMarkup } from "@/components/SchemaMarkup";
 import { generateBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: `Service Areas — Eastern Washington & Northern Idaho`,
-  description: `${business.shortName} serves ${cities.length}+ communities across Eastern Washington and Northern Idaho. Find ${business.category.toLowerCase()} services near you.`,
+  title: `Service Areas — Utah & Texas`,
+  description: `${business.shortName} serves ${cities.length}+ communities across Utah and Texas. Find ${business.category.toLowerCase()} services near you.`,
 };
 
 export default function AreasPage() {
-  const waCities = getCitiesByState("WA");
-  const idCities = getCitiesByState("ID");
+  const utCities = getCitiesByState("UT");
+  const txCities = getCitiesByState("TX");
 
   const CityCard = ({ city }: { city: (typeof cities)[number] }) => (
     <Link
@@ -53,24 +53,24 @@ export default function AreasPage() {
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4">Service Areas</h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
             Professional {business.category.toLowerCase()} services
-            across {cities.length}+ communities in Eastern Washington and Northern Idaho.
+            across {cities.length}+ communities in Utah and Texas.
           </p>
         </div>
       </section>
 
-      {/* Washington */}
+      {/* Utah */}
       <section className="py-20 -mt-10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-3 mb-3">
-            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">WA</span>
-            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Eastern Washington</p>
+            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">UT</span>
+            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Utah</p>
           </div>
           <p className="text-gray-500 mb-2">
-            {waCities.length} communities served &middot; License #{business.licenses.wa}
+            {utCities.length} communities served &middot; License #{business.licenses.ut}
           </p>
           <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {waCities
+            {utCities
               .sort((a, b) => b.population - a.population)
               .map((city) => (
                 <CityCard key={city.slug} city={city} />
@@ -79,19 +79,19 @@ export default function AreasPage() {
         </div>
       </section>
 
-      {/* Idaho */}
+      {/* Texas */}
       <section className="py-20 concrete-texture">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-3 mb-3">
-            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">ID</span>
-            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Northern Idaho</p>
+            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">TX</span>
+            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Texas</p>
           </div>
           <p className="text-gray-500 mb-2">
-            {idCities.length} communities served &middot; License #{business.licenses.id}
+            {txCities.length} communities served &middot; License #{business.licenses.tx}
           </p>
           <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {idCities
+            {txCities
               .sort((a, b) => b.population - a.population)
               .map((city) => (
                 <CityCard key={city.slug} city={city} />

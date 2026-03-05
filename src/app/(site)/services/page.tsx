@@ -22,7 +22,7 @@ export default function ServicesPage() {
           <p className="text-blue-400 font-bold text-sm uppercase tracking-[0.2em] mb-3">What We Do</p>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4">Our Services</h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-            Professional {business.category.toLowerCase()} for residential and commercial projects across Eastern Washington and Northern Idaho.
+            Professional {business.category.toLowerCase()} for residential and commercial projects across Utah and Texas.
           </p>
         </div>
       </section>

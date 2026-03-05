@@ -1,17 +1,21 @@
 /**
  * JSON-LD Schema Markup Generators
  * Generates structured data for Google rich results
+ *
+ * Uses @type "RoofingContractor" (schema.org subtype of
+ * HomeAndConstructionBusiness > LocalBusiness) for maximum
+ * relevance in roofing-related search results.
  */
 
 import { business } from "@/config/business";
-import { City } from "@/config/cities";
+import { cities, City } from "@/config/cities";
 import { Service } from "@/config/services";
 import { services } from "@/config/services";
 
 export function generateLocalBusinessSchema() {
   return {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": "RoofingContractor",
     "@id": `${business.website}/#business`,
     name: business.name,
     description: business.description,
@@ -20,6 +24,8 @@ export function generateLocalBusinessSchema() {
     email: business.email,
     foundingDate: `${business.founded}`,
     priceRange: business.priceRange,
+    image: `${business.website}/logo.webp`,
+    logo: `${business.website}/logo.webp`,
     address: {
       "@type": "PostalAddress",
       streetAddress: business.address.street,
@@ -52,6 +58,20 @@ export function generateLocalBusinessSchema() {
       ratingValue: business.stats.reviewAverage,
       reviewCount: business.stats.reviewCount,
     },
+    sameAs: [
+      business.social.facebook,
+      business.social.google,
+      business.social.yelp,
+      business.social.nextdoor,
+    ].filter(Boolean),
+    areaServed: cities.map((city) => ({
+      "@type": "City",
+      name: city.name,
+      containedInPlace: {
+        "@type": "State",
+        name: city.state,
+      },
+    })),
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: `${business.shortName} Services`,
@@ -75,11 +95,15 @@ export function generateServiceSchema(service: Service) {
     description: service.description,
     serviceType: service.name,
     provider: {
-      "@type": "LocalBusiness",
+      "@type": "RoofingContractor",
       "@id": `${business.website}/#business`,
       name: business.name,
       telephone: business.phoneTel,
     },
+    areaServed: cities.map((city) => ({
+      "@type": "City",
+      name: city.name,
+    })),
   };
 }
 
@@ -91,7 +115,7 @@ export function generateCityServiceSchema(city: City) {
     description: `Professional ${business.category.toLowerCase()} services in ${city.name}, ${city.stateAbbr}. ${business.description}`,
     serviceType: business.category,
     provider: {
-      "@type": "LocalBusiness",
+      "@type": "RoofingContractor",
       "@id": `${business.website}/#business`,
       name: business.name,
       telephone: business.phoneTel,
@@ -114,37 +138,44 @@ export function generateCityServiceSchema(city: City) {
 }
 
 export function generateCityFAQSchema(city: City) {
-  const serviceName = business.category.toLowerCase();
   return {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     mainEntity: [
       {
         "@type": "Question",
-        name: `How much does ${serviceName} cost in ${city.name}?`,
+        name: `How much does roofing cost in ${city.name}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `${business.category} costs in ${city.name}, ${city.stateAbbr} vary by project scope. Contact ${business.shortName} at ${business.phone} for a free on-site estimate.`,
+          text: `Roofing costs in ${city.name}, ${city.stateAbbr} vary by roof size, materials, and project scope. A typical re-roof ranges from $8,000-$25,000+. Contact ${business.shortName} at ${business.phone} for a free inspection and estimate.`,
         },
       },
       {
         "@type": "Question",
-        name: `Do you offer free estimates in ${city.name}?`,
+        name: `Do you offer free roof inspections in ${city.name}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes! ${business.shortName} provides free on-site estimates for all ${serviceName} projects in ${city.name} and surrounding areas. Call us at ${business.phone}.`,
+          text: `Yes! ${business.shortName} provides free roof inspections and estimates for all projects in ${city.name} and surrounding areas in ${city.county} County. Call us at ${business.phone}.`,
         },
       },
       {
         "@type": "Question",
-        name: `Are you licensed to work in ${city.state}?`,
+        name: `Are you licensed for roofing in ${city.state}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes, ${business.shortName} is fully licensed and insured for ${serviceName} work in ${city.state}. ${
-            city.stateAbbr === "WA"
-              ? `WA License #${business.licenses.wa}`
-              : `ID License #${business.licenses.id}`
+          text: `Yes, ${business.shortName} is fully licensed and insured for roofing work in ${city.state}. ${
+            city.stateAbbr === "UT"
+              ? `UT License #${business.licenses.ut}`
+              : `TX License #${business.licenses.tx}`
           }.`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `Do you handle insurance claims for storm damage in ${city.name}?`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `Absolutely. ${business.shortName} has extensive experience with insurance claims for hail and wind damage in ${city.name}. We document damage, meet with adjusters, and handle the process so you don't have to.`,
         },
       },
       {
@@ -167,7 +198,7 @@ export function generateCityServiceDetailSchema(city: City, service: Service) {
     description: `Professional ${service.name.toLowerCase()} services in ${city.name}, ${city.stateAbbr}. ${service.description}`,
     serviceType: service.name,
     provider: {
-      "@type": "LocalBusiness",
+      "@type": "RoofingContractor",
       "@id": `${business.website}/#business`,
       name: business.name,
       telephone: business.phoneTel,
@@ -200,7 +231,7 @@ export function generateCityServiceFAQSchema(city: City, service: Service) {
         name: `How much does ${svc} cost in ${city.name}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `${service.name} costs in ${city.name}, ${city.stateAbbr} depend on project size, concrete thickness, and access conditions. Contact ${business.shortName} at ${business.phone} for a free on-site estimate.`,
+          text: `${service.name} costs in ${city.name}, ${city.stateAbbr} depend on roof size, materials, and project scope. Contact ${business.shortName} at ${business.phone} for a free on-site estimate.`,
         },
       },
       {
@@ -208,7 +239,7 @@ export function generateCityServiceFAQSchema(city: City, service: Service) {
         name: `How long does a ${svc} project take in ${city.name}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Most ${svc} projects in ${city.name} are completed in one day. Larger commercial jobs may take 2-3 days. We'll provide a timeline with your free estimate.`,
+          text: `Most ${svc} projects in ${city.name} are completed in 1-5 days depending on roof size and complexity. We'll provide a timeline with your free estimate.`,
         },
       },
       {
@@ -216,15 +247,15 @@ export function generateCityServiceFAQSchema(city: City, service: Service) {
         name: `Do you need a permit for ${svc} in ${city.name}, ${city.stateAbbr}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Permit requirements for ${svc} in ${city.name} vary by project scope. ${business.shortName} is fully licensed in ${city.state} (${city.stateAbbr === "WA" ? `License #${business.licenses.wa}` : `License #${business.licenses.id}`}) and can advise on permits for your specific project.`,
+          text: `Permit requirements for ${svc} in ${city.name} vary by project scope. ${business.shortName} is fully licensed in ${city.state} (${city.stateAbbr === "UT" ? `License #${business.licenses.ut}` : `License #${business.licenses.tx}`}) and handles permits as needed.`,
         },
       },
       {
         "@type": "Question",
-        name: `Is ${business.shortName} licensed for ${svc} in ${city.state}?`,
+        name: `Does insurance cover ${svc} in ${city.name}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Yes. ${business.shortName} is fully licensed and insured for ${svc} in ${city.state}. ${city.stateAbbr === "WA" ? `WA License #${business.licenses.wa}` : `ID License #${business.licenses.id}`}. We carry full liability insurance on every job.`,
+          text: `Many homeowner insurance policies cover ${svc} when caused by storm damage (hail, wind, etc.). ${business.shortName} works directly with insurance companies in ${city.name} to maximize your claim coverage.`,
         },
       },
       {
@@ -232,7 +263,7 @@ export function generateCityServiceFAQSchema(city: City, service: Service) {
         name: `Do you offer free ${svc} estimates in ${city.name}?`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: `Absolutely. ${business.shortName} provides free on-site estimates for all ${svc} projects in ${city.name} and surrounding areas in ${city.county} County. Call ${business.phone} or book online.`,
+          text: `Absolutely. ${business.shortName} provides free inspections and estimates for all ${svc} projects in ${city.name} and surrounding areas in ${city.county} County. Call ${business.phone} or book online.`,
         },
       },
     ],

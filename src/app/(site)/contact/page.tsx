@@ -4,7 +4,7 @@ import { services } from "@/config/services";
 
 export const metadata: Metadata = {
   title: `Contact Us — Free Estimates`,
-  description: `Contact ${business.shortName} for a free estimate. Call ${business.phone} or fill out our online form. Serving Eastern Washington and Northern Idaho.`,
+  description: `Contact ${business.shortName} for a free estimate. Call ${business.phone} or fill out our online form. Serving Utah and Texas.`,
 };
 
 export default function ContactPage() {
@@ -87,7 +87,7 @@ export default function ContactPage() {
                     id="city"
                     name="city"
                     required
-                    placeholder="e.g., Spokane, WA"
+                    placeholder="e.g., Heber City, UT"
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
                   />
                 </div>
@@ -172,12 +172,12 @@ export default function ContactPage() {
                 <h3 className="font-bold text-lg mb-3">Licenses</h3>
                 <div className="space-y-2">
                   <div className="flex items-center gap-3">
-                    <span className="bg-blue-600 text-white px-2.5 py-0.5 rounded-full font-bold text-xs">WA</span>
-                    <span className="text-gray-600 text-sm font-mono">{business.licenses.wa}</span>
+                    <span className="bg-blue-600 text-white px-2.5 py-0.5 rounded-full font-bold text-xs">UT</span>
+                    <span className="text-gray-600 text-sm font-mono">{business.licenses.ut}</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="bg-blue-600 text-white px-2.5 py-0.5 rounded-full font-bold text-xs">ID</span>
-                    <span className="text-gray-600 text-sm font-mono">{business.licenses.id}</span>
+                    <span className="bg-blue-600 text-white px-2.5 py-0.5 rounded-full font-bold text-xs">TX</span>
+                    <span className="text-gray-600 text-sm font-mono">{business.licenses.tx}</span>
                   </div>
                   <p className="text-sm text-gray-400 mt-2">Fully Bonded &amp; Insured</p>
                 </div>

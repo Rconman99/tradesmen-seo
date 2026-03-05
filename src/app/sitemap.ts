@@ -5,54 +5,79 @@ import { services } from "@/config/services";
 import { sanityFetch } from "@/sanity/lib/client";
 import { POST_SLUGS_QUERY } from "@/sanity/lib/queries";
 
-export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+/**
+ * Sitemap index — 5 sub-sitemaps split by content type.
+ * Next.js generates /sitemap.xml as an index pointing to
+ * /sitemap/0.xml through /sitemap/4.xml automatically.
+ */
+export async function generateSitemaps() {
+  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+}
+
+export default async function sitemap({
+  id,
+}: {
+  id: number;
+}): Promise<MetadataRoute.Sitemap> {
   const baseUrl = business.website;
 
-  const staticPages: MetadataRoute.Sitemap = [
-    { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
-    { url: `${baseUrl}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/areas`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
-    { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
-    { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
-    { url: `${baseUrl}/reviews`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-    { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
-  ];
+  switch (id) {
+    // ── Static pages ──────────────────────────────
+    case 0:
+      return [
+        { url: baseUrl, lastModified: new Date(), changeFrequency: "weekly", priority: 1 },
+        { url: `${baseUrl}/services`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+        { url: `${baseUrl}/areas`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.9 },
+        { url: `${baseUrl}/about`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.7 },
+        { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
+        { url: `${baseUrl}/reviews`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+        { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+      ];
 
-  const servicePages: MetadataRoute.Sitemap = services.map((service) => ({
-    url: `${baseUrl}/services/${service.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: 0.8,
-  }));
+    // ── Service hub pages ─────────────────────────
+    case 1:
+      return services.map((service) => ({
+        url: `${baseUrl}/services/${service.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.8,
+      }));
 
-  const cityPages: MetadataRoute.Sitemap = cities.map((city) => ({
-    url: `${baseUrl}/areas/${city.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly",
-    priority: city.priority === "high" ? 0.9 : city.priority === "medium" ? 0.7 : 0.6,
-  }));
+    // ── City pages ────────────────────────────────
+    case 2:
+      return cities.map((city) => ({
+        url: `${baseUrl}/areas/${city.slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: city.priority === "high" ? 0.9 : city.priority === "medium" ? 0.7 : 0.6,
+      }));
 
-  const cityServicePages: MetadataRoute.Sitemap = cities.flatMap((city) =>
-    services.map((service) => ({
-      url: `${baseUrl}/areas/${city.slug}/${service.slug}`,
-      lastModified: new Date(),
-      changeFrequency: "monthly" as const,
-      priority: city.priority === "high" ? 0.85 : city.priority === "medium" ? 0.65 : 0.55,
-    }))
-  );
+    // ── City × Service pages ──────────────────────
+    case 3:
+      return cities.flatMap((city) =>
+        services.map((service) => ({
+          url: `${baseUrl}/areas/${city.slug}/${service.slug}`,
+          lastModified: new Date(),
+          changeFrequency: "monthly" as const,
+          priority: city.priority === "high" ? 0.85 : city.priority === "medium" ? 0.65 : 0.55,
+        }))
+      );
 
-  // Blog post pages from Sanity
-  const postSlugs = await sanityFetch<string[]>({
-    query: POST_SLUGS_QUERY,
-    tags: ["post"],
-  });
+    // ── Blog posts ────────────────────────────────
+    case 4: {
+      const postSlugs = await sanityFetch<string[]>({
+        query: POST_SLUGS_QUERY,
+        tags: ["post"],
+      });
+      return postSlugs.map((slug) => ({
+        url: `${baseUrl}/blog/${slug}`,
+        lastModified: new Date(),
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      }));
+    }
 
-  const blogPages: MetadataRoute.Sitemap = postSlugs.map((slug) => ({
-    url: `${baseUrl}/blog/${slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.6,
-  }));
-
-  return [...staticPages, ...servicePages, ...cityPages, ...cityServicePages, ...blogPages];
+    default:
+      return [];
+  }
 }

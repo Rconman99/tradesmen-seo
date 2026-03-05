@@ -10,7 +10,7 @@ import { FEATURED_TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
 import type { SanityTestimonial } from "@/sanity/types";
 
 export const metadata: Metadata = {
-  title: `${business.shortName} | ${business.tagline} in Eastern WA & Northern ID`,
+  title: `${business.shortName} | ${business.tagline} in Utah & Texas`,
   description: business.description,
 };
 
@@ -62,16 +62,16 @@ export default async function HomePage() {
             />
 
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-black leading-[0.85] tracking-tight mb-8">
-              Your Local
+              Your Trusted
               <br />
-              <span className="text-gradient">Saw &amp; Drilling</span>
+              <span className="text-gradient">Roofing</span>
               <br />
-              Company
+              Experts
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl leading-relaxed font-light">
-              Precision concrete cutting, core drilling, and removal for Eastern
-              Washington &amp; Northern Idaho since {business.founded}.
+              Expert roofing, storm damage repair, and maintenance for Utah &amp;
+              Texas since {business.founded}.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-14">
@@ -165,7 +165,7 @@ export default async function HomePage() {
               {
                 icon: "🛡️",
                 title: "Licensed & Insured",
-                desc: `WA #${business.licenses.wa} · ID #${business.licenses.id}. Fully bonded and insured for your protection.`,
+                desc: `UT #${business.licenses.ut} · TX #${business.licenses.tx}. Fully bonded and insured for your protection.`,
                 color: "blue",
               },
               {
@@ -269,8 +269,8 @@ export default async function HomePage() {
             </h2>
             <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto mt-4" />
             <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-              From Spokane to the Tri-Cities, Coeur d&apos;Alene to Yakima &mdash;
-              we cover Eastern Washington and Northern Idaho.
+              From Heber City to Salt Lake City, Park City to Frisco &mdash;
+              we cover Utah and Texas.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">

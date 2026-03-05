@@ -1,6 +1,6 @@
 /**
  * ============================================
- * BUSINESS CONFIG — Edit this per client
+ * BUSINESS CONFIG — Frame Restoration Utah
  * ============================================
  * This is the ONLY file you need to change to
  * spin up a new tradesmen website. Everything
@@ -8,63 +8,63 @@
  */
 
 export const business = {
-  name: "Northwest Concrete Cutting LLC",
-  shortName: "Northwest Concrete Cutting",
-  tagline: "Professional Concrete Cutting Services",
+  name: "Frame Restoration Utah",
+  shortName: "Frame Restoration",
+  tagline: "Expert Roofing Services You Can Trust",
   description:
-    "Licensed and insured concrete cutting experts serving Eastern Washington and Northern Idaho. Flat sawing, core drilling, wall sawing, and concrete removal for residential and commercial projects.",
-  founded: 2010,
-  phone: "(509) 555-0123",
-  phoneTel: "+15095550123", // for tel: links
-  email: "info@northwestconcretecutting.com",
-  website: "https://www.northwestconcretecutting.com",
+    "Frame Restoration Utah provides expert roofing solutions to residential and commercial clients across Utah and Texas. With over a decade of experience, we deliver high-quality craftsmanship backed by comprehensive warranties. Our team is dedicated to protecting your property with reliable, professional roofing services.",
+  founded: 2014,
+  phone: "(801) 555-0199",
+  phoneTel: "+18015550199", // for tel: links
+  email: "info@framerestorationutah.com",
+  website: "https://www.framerestorationutah.com",
 
   address: {
-    street: "123 Industrial Way",
-    city: "Spokane",
-    state: "WA",
-    stateFullName: "Washington",
-    zip: "99201",
+    street: "123 Main Street",
+    city: "Heber City",
+    state: "UT",
+    stateFullName: "Utah",
+    zip: "84032",
     country: "US",
   },
 
   coordinates: {
-    lat: 47.6588,
-    lng: -117.426,
+    lat: 40.5069,
+    lng: -111.4133,
   },
 
   hours: {
-    weekdays: "7:00 AM - 5:00 PM",
-    saturday: "8:00 AM - 2:00 PM",
-    sunday: "Closed",
+    weekdays: "7:00 AM - 6:00 PM",
+    saturday: "8:00 AM - 3:00 PM",
+    sunday: "Emergency Only",
     opensAt: "07:00",
-    closesAt: "17:00",
+    closesAt: "18:00",
   },
 
   licenses: {
-    wa: "NORTHCC840DN",
-    id: "RCE-12345",
+    ut: "FRAMERU-001",
+    tx: "FRAMERTX-001",
   },
 
   social: {
-    facebook: "https://facebook.com/northwestconcretecutting",
+    facebook: "https://facebook.com/framerestorationutah",
     google: "", // Google Business Profile URL
     yelp: "",
     nextdoor: "",
   },
 
   stats: {
-    yearsExperience: 15,
-    projectsCompleted: 2500,
-    reviewCount: 87,
-    reviewAverage: 4.9,
+    yearsExperience: 12,
+    projectsCompleted: 3500,
+    reviewCount: 142,
+    reviewAverage: 4.8,
   },
 
   priceRange: "$$",
 
   // Primary trade category - used for schema markup
-  category: "Concrete Cutting Service",
-  secondaryCategories: ["Demolition Contractor", "Concrete Contractor"],
+  category: "Roofing Contractor",
+  secondaryCategories: ["Storm Damage Repair", "Gutter Contractor"],
 } as const;
 
 export type Business = typeof business;

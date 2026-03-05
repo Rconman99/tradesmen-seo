@@ -19,6 +19,21 @@ export const post = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
+      name: "seoTitle",
+      title: "SEO Title",
+      type: "string",
+      description: "Override title for search results (defaults to post title)",
+      validation: (rule) => rule.max(70),
+    }),
+    defineField({
+      name: "seoDescription",
+      title: "SEO Description",
+      type: "text",
+      rows: 2,
+      description: "Meta description for search results (defaults to excerpt)",
+      validation: (rule) => rule.max(160),
+    }),
+    defineField({
       name: "excerpt",
       title: "Excerpt",
       type: "text",
@@ -33,10 +48,41 @@ export const post = defineType({
       options: { hotspot: true },
     }),
     defineField({
+      name: "author",
+      title: "Author",
+      type: "reference",
+      to: [{ type: "author" }],
+    }),
+    defineField({
       name: "category",
       title: "Category",
       type: "reference",
       to: [{ type: "category" }],
+    }),
+    defineField({
+      name: "relatedServices",
+      title: "Related Services",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "Service slugs (e.g., re-roof, hail-damage-repair) for cross-linking",
+      options: {
+        list: [
+          { title: "Re-Roof", value: "re-roof" },
+          { title: "Hail Damage Repair", value: "hail-damage-repair" },
+          { title: "Wind Damage Repair", value: "wind-damage-repair" },
+          { title: "Leak Repair", value: "leak-repair" },
+          { title: "Gutters & Siding", value: "gutters-and-siding" },
+          { title: "Commercial Roofing", value: "commercial-roofing" },
+          { title: "Roof Maintenance Agreements", value: "roof-maintenance-agreements" },
+        ],
+      },
+    }),
+    defineField({
+      name: "relatedCities",
+      title: "Related Cities",
+      type: "array",
+      of: [{ type: "string" }],
+      description: "City slugs for geo-targeted cross-linking",
     }),
     defineField({
       name: "body",

@@ -5,7 +5,7 @@ import { CTASection } from "@/components/CTASection";
 
 export const metadata: Metadata = {
   title: `About ${business.shortName}`,
-  description: `Learn about ${business.shortName}. ${business.stats.yearsExperience}+ years of ${business.category.toLowerCase()} experience serving Eastern Washington and Northern Idaho.`,
+  description: `Learn about ${business.shortName}. ${business.stats.yearsExperience}+ years of ${business.category.toLowerCase()} experience serving Utah and Texas.`,
 };
 
 export default function AboutPage() {
@@ -19,7 +19,7 @@ export default function AboutPage() {
             About <span className="text-gradient">{business.shortName}</span>
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-            {business.tagline} — serving Eastern Washington and Northern Idaho
+            {business.tagline} — serving Utah and Texas
             since {business.founded}.
           </p>
         </div>
@@ -56,13 +56,13 @@ export default function AboutPage() {
             <p>
               Founded in {business.founded}, {business.name} has grown to become
               one of the most trusted {business.category.toLowerCase()}{" "}
-              companies in the Eastern Washington and Northern Idaho region.
+              companies across Utah and Texas.
               With {business.stats.yearsExperience}+ years of experience and{" "}
               {business.stats.projectsCompleted.toLocaleString()}+ completed
               projects, we bring unmatched expertise to every job.
             </p>
             <p>
-              We are fully licensed and insured in both Washington and Idaho.
+              We are fully licensed and insured in both Utah and Texas.
               Our commitment to professionalism and safety means you can trust
               us with your project.
             </p>
@@ -78,8 +78,8 @@ export default function AboutPage() {
           <div className="w-16 h-1 bg-blue-600 rounded-full mb-10" />
           <div className="grid sm:grid-cols-2 gap-5">
             {[
-              { state: "WA", label: "Washington License", value: business.licenses.wa },
-              { state: "ID", label: "Idaho License", value: business.licenses.id },
+              { state: "UT", label: "Utah License", value: business.licenses.ut },
+              { state: "TX", label: "Texas License", value: business.licenses.tx },
             ].map((lic) => (
               <div key={lic.state} className="bg-white rounded-2xl p-6 border-2 border-gray-100">
                 <div className="flex items-center gap-3 mb-3">
@@ -122,8 +122,8 @@ export default function AboutPage() {
               service our customers expect and receive.
             </p>
             <p>
-              We serve the entire Eastern Washington and Northern Idaho region,
-              from Spokane and the Tri-Cities to Coeur d&apos;Alene and beyond.
+              We serve communities across Utah and Texas, from Park City and
+              Salt Lake City to the Dallas-Fort Worth metroplex.
               No matter where your project is located, our team will be there.
             </p>
           </div>

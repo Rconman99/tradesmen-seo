@@ -10,8 +10,26 @@ export const POSTS_QUERY = defineQuery(`
     excerpt,
     featuredImage,
     publishedAt,
-    category->{title, slug}
+    category->{title, slug},
+    author->{_id, name, slug, bio, image}
   }
+`);
+
+export const POSTS_PAGINATED_QUERY = defineQuery(`
+  *[_type == "post"] | order(publishedAt desc) [$start..$end] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    featuredImage,
+    publishedAt,
+    category->{title, slug},
+    author->{_id, name, slug, bio, image}
+  }
+`);
+
+export const POSTS_COUNT_QUERY = defineQuery(`
+  count(*[_type == "post"])
 `);
 
 export const POST_BY_SLUG_QUERY = defineQuery(`
@@ -19,11 +37,16 @@ export const POST_BY_SLUG_QUERY = defineQuery(`
     _id,
     title,
     slug,
+    seoTitle,
+    seoDescription,
     excerpt,
     featuredImage,
     body,
     publishedAt,
-    category->{title, slug}
+    category->{title, slug},
+    author->{_id, name, slug, bio, image},
+    relatedServices,
+    relatedCities
   }
 `);
 
@@ -40,6 +63,27 @@ export const RECENT_POSTS_QUERY = defineQuery(`
     featuredImage,
     publishedAt,
     category->{title, slug}
+  }
+`);
+
+export const RELATED_POSTS_QUERY = defineQuery(`
+  *[_type == "post" && slug.current != $slug && category._ref == $categoryId] | order(publishedAt desc) [0..2] {
+    _id,
+    title,
+    slug,
+    excerpt,
+    featuredImage,
+    publishedAt,
+    category->{title, slug}
+  }
+`);
+
+export const POSTS_RSS_QUERY = defineQuery(`
+  *[_type == "post"] | order(publishedAt desc) [0..49] {
+    title,
+    slug,
+    excerpt,
+    publishedAt
   }
 `);
 

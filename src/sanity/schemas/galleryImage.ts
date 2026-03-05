@@ -28,7 +28,7 @@ export const galleryImage = defineType({
       name: "city",
       title: "City",
       type: "string",
-      description: "City slug where this project was completed (e.g., spokane)",
+      description: "City slug where this project was completed (e.g., heber-city)",
     }),
     defineField({
       name: "service",
@@ -36,12 +36,13 @@ export const galleryImage = defineType({
       type: "string",
       options: {
         list: [
-          { title: "Concrete Cutting", value: "concrete-cutting" },
-          { title: "Core Drilling", value: "core-drilling" },
-          { title: "Wall Sawing", value: "wall-sawing" },
-          { title: "Concrete Removal", value: "concrete-removal" },
-          { title: "Concrete Scanning (GPR)", value: "concrete-scanning" },
-          { title: "Flat Sawing", value: "flat-sawing" },
+          { title: "Re-Roof", value: "re-roof" },
+          { title: "Hail Damage Repair", value: "hail-damage-repair" },
+          { title: "Wind Damage Repair", value: "wind-damage-repair" },
+          { title: "Leak Repair", value: "leak-repair" },
+          { title: "Gutters & Siding", value: "gutters-and-siding" },
+          { title: "Commercial Roofing", value: "commercial-roofing" },
+          { title: "Roof Maintenance", value: "roof-maintenance-agreements" },
         ],
       },
     }),

@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { business } from "@/config/business";
 import { services, getServiceBySlug } from "@/config/services";
-import { getCitiesByPriority } from "@/config/cities";
 import { CTASection } from "@/components/CTASection";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
+import { ServiceAreaGrid } from "@/components/ServiceAreaGrid";
 import { generateServiceSchema, generateBreadcrumbSchema } from "@/lib/schema";
 
 export function generateStaticParams() {
@@ -23,7 +23,7 @@ export async function generateMetadata({
 
   return {
     title: `${service.name} Services`,
-    description: `Professional ${service.name.toLowerCase()} services in Eastern Washington and Northern Idaho. ${service.description} Call ${business.phone} for a free estimate.`,
+    description: `Professional ${service.name.toLowerCase()} services across Utah and Texas. ${service.description} Call ${business.phone} for a free estimate.`,
   };
 }
 
@@ -36,7 +36,6 @@ export default async function ServicePage({
   const service = getServiceBySlug(slug);
   if (!service) notFound();
 
-  const highCities = getCitiesByPriority("high");
   const otherServices = services.filter((s) => s.slug !== slug);
 
   return (
@@ -117,14 +116,14 @@ export default async function ServicePage({
                     With {business.stats.yearsExperience}+ years of experience
                     and {business.stats.projectsCompleted.toLocaleString()}+
                     completed projects, {business.shortName} is the trusted
-                    choice for {service.name.toLowerCase()} in Eastern Washington
-                    and Northern Idaho.
+                    choice for {service.name.toLowerCase()} across Utah and
+                    Texas.
                   </p>
                   <p>
-                    We use professional-grade diamond equipment for clean, precise
+                    We use premium materials and proven techniques for lasting
                     results on every project. Our team is fully licensed and insured,
-                    and we provide free on-site estimates so you know exactly what to
-                    expect before work begins.
+                    and we provide free inspections and estimates so you know exactly
+                    what to expect before work begins.
                   </p>
                 </div>
               </div>
@@ -138,8 +137,8 @@ export default async function ServicePage({
                   {[
                     { label: "Experience", value: `${business.stats.yearsExperience}+ years` },
                     { label: "Rating", value: `${business.stats.reviewAverage} ★` },
-                    { label: "WA License", value: business.licenses.wa },
-                    { label: "ID License", value: business.licenses.id },
+                    { label: "UT License", value: business.licenses.ut },
+                    { label: "TX License", value: business.licenses.tx },
                   ].map((row) => (
                     <li key={row.label} className="flex justify-between items-center pb-4 border-b border-gray-100 last:border-0 last:pb-0">
                       <span className="text-gray-400">{row.label}</span>
@@ -163,25 +162,13 @@ export default async function ServicePage({
         </div>
       </section>
 
-      {/* Available in these cities */}
+      {/* Available in these cities — ALL 14 cities */}
       <section className="py-20 concrete-texture">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em] mb-3">Available In</p>
           <h2 className="text-3xl font-black mb-2">{service.name} Service Areas</h2>
           <div className="w-16 h-1 bg-blue-600 rounded-full mb-10" />
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {highCities.map((city) => (
-              <Link
-                key={city.slug}
-                href={`/areas/${city.slug}`}
-                className="group bg-white rounded-xl p-5 border-2 border-gray-100 hover:border-blue-600 hover:shadow-lg transition-all"
-              >
-                <span className="font-bold group-hover:text-blue-600 transition-colors">{city.name}</span>
-                <span className="text-gray-400">, {city.stateAbbr}</span>
-                <p className="text-xs text-gray-400 mt-1">{service.name} available</p>
-              </Link>
-            ))}
-          </div>
+          <ServiceAreaGrid currentService={service} />
         </div>
       </section>
 
