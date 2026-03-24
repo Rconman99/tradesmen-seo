@@ -17,9 +17,14 @@ export async function generateMetadata({ params }: { params: Promise<{ city: str
   const { city: citySlug } = await params;
   const city = getCityBySlug(citySlug);
   if (!city) return {};
-  const title = `${business.category} in ${city.name}, ${city.stateAbbr}`;
-  const description = `Professional ${business.category.toLowerCase()} in ${city.name}, ${city.stateAbbr}. Licensed & insured. Free estimates. Call ${business.phone} today!`;
-  return { title, description, openGraph: { title, description, type: "website" } };
+  const title = `${business.category} in ${city.name}, ${city.stateAbbr} | Free Estimate`;
+  const description = `Professional ${business.category.toLowerCase()} in ${city.name}, ${city.stateAbbr}. ${business.stats.reviewAverage}-star rated, licensed & insured. Free estimates. Call ${business.phone} today!`;
+  return {
+    title,
+    description,
+    openGraph: { title, description, type: "website" },
+    alternates: { canonical: `${business.website}/areas/${citySlug}` },
+  };
 }
 
 export default async function CityPage({ params }: { params: Promise<{ city: string }> }) {

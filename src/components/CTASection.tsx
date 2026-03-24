@@ -11,12 +11,12 @@ export function CTASection({ title, subtitle, cityName }: CTASectionProps) {
   const heading =
     title ||
     (cityName
-      ? `Need ${business.category} in ${cityName}?`
-      : `Ready to Get Your Project Started?`);
+      ? `Get a Free Roof Inspection in ${cityName}`
+      : `Get Your Free Roof Inspection Today`);
 
   const sub =
     subtitle ||
-    `Free estimates, fast scheduling. Call us or book online \u2014 we\u2019ll get back to you within 24 hours.`;
+    `No obligation, no hidden fees. We\u2019ll inspect your roof, provide a detailed report, and give you an honest estimate \u2014 usually within 24 hours.`;
 
   return (
     <section className="relative bg-blue-600 text-white py-20 md:py-24 overflow-hidden">
@@ -28,15 +28,27 @@ export function CTASection({ title, subtitle, cityName }: CTASectionProps) {
         <h2 className="text-3xl md:text-5xl font-black mb-4 tracking-tight">
           {heading}
         </h2>
-        <p className="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">
+        <p className="text-xl text-blue-100 mb-6 max-w-2xl mx-auto">
           {sub}
         </p>
+
+        {/* Trust signals */}
+        <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-blue-200 mb-10">
+          <span className="flex items-center gap-1.5">
+            <span className="text-orange-400">{"★★★★★"}</span>
+            {business.stats.reviewAverage}/5 ({business.stats.reviewCount}+ reviews)
+          </span>
+          <span>UT Lic #{business.licenses.ut}</span>
+          <span>TX Lic #{business.licenses.tx}</span>
+          <span>Since {business.founded}</span>
+        </div>
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/contact"
             className="bg-white text-blue-600 px-10 py-5 rounded-full font-bold text-lg hover:bg-blue-50 transition-all shadow-2xl hover:scale-105"
           >
-            Book Online
+            Schedule Free Inspection
           </Link>
           <a
             href={`tel:${business.phoneTel}`}

@@ -31,12 +31,12 @@ export function Header() {
             />
           </Link>
 
-          {/* Book Online */}
+          {/* Free Estimate CTA */}
           <Link
             href="/contact"
             className="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold text-sm hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20"
           >
-            Book Online
+            Free Estimate
           </Link>
         </div>
       </div>
@@ -54,6 +54,7 @@ export function Header() {
                 { href: "/areas", label: "Service Areas" },
                 { href: "/reviews", label: "Reviews" },
                 { href: "/blog", label: "Blog" },
+                { href: "/resources/storm-damage-guide", label: "Free Guide" },
                 { href: "/contact", label: "Contact Us" },
               ].map((link) => (
                 <Link

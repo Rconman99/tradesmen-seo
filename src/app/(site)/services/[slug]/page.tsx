@@ -22,8 +22,11 @@ export async function generateMetadata({
   if (!service) return {};
 
   return {
-    title: `${service.name} Services`,
+    title: `${service.name} Services | Licensed Roofer in Utah & Texas`,
     description: `Professional ${service.name.toLowerCase()} services across Utah and Texas. ${service.description} Call ${business.phone} for a free estimate.`,
+    alternates: {
+      canonical: `${business.website}/services/${slug}`,
+    },
   };
 }
 
@@ -67,8 +70,12 @@ export default async function ServicePage({
           <h1 className="text-4xl sm:text-5xl md:text-7xl font-black tracking-tight mb-4">
             <span className="text-gradient">{service.name}</span>
           </h1>
-          <p className="text-lg text-gray-300 max-w-2xl mb-8 leading-relaxed">
+          <p className="text-lg text-gray-300 max-w-2xl mb-4 leading-relaxed">
             {service.description}
+          </p>
+          {/* AI-extractable answer block for AI search citations */}
+          <p className="text-sm text-gray-400 max-w-2xl mb-8 leading-relaxed border-l-2 border-blue-500/30 pl-4">
+            {service.aiSummary}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/contact" className="bg-blue-600 text-white px-10 py-5 rounded-full font-bold text-lg text-center hover:bg-blue-700 transition-all shadow-2xl shadow-blue-600/30 hover:scale-105">
@@ -136,7 +143,7 @@ export default async function ServicePage({
                 <ul className="space-y-4 text-sm">
                   {[
                     { label: "Experience", value: `${business.stats.yearsExperience}+ years` },
-                    { label: "Rating", value: `${business.stats.reviewAverage} ★` },
+                    { label: "Rating", value: `${business.stats.reviewAverage} ★ (${business.stats.reviewCount}+ reviews)` },
                     { label: "UT License", value: business.licenses.ut },
                     { label: "TX License", value: business.licenses.tx },
                   ].map((row) => (
@@ -150,12 +157,21 @@ export default async function ServicePage({
                     <span className="font-bold text-green-600 bg-green-50 px-3 py-1 rounded-full text-xs">FREE</span>
                   </li>
                 </ul>
+                <Link
+                  href="/contact"
+                  className="block w-full bg-blue-600 text-white text-center px-6 py-4 rounded-full font-bold mt-6 hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20 text-lg"
+                >
+                  Get Free Estimate
+                </Link>
                 <a
                   href={`tel:${business.phoneTel}`}
-                  className="block w-full bg-orange-500 text-white text-center px-6 py-4 rounded-full font-bold mt-6 hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/20 text-lg"
+                  className="block w-full bg-orange-500 text-white text-center px-6 py-4 rounded-full font-bold mt-3 hover:bg-orange-600 transition-colors shadow-lg shadow-orange-500/20"
                 >
                   Call {business.phone}
                 </a>
+                <p className="text-xs text-center text-gray-400 mt-3">
+                  Response within 24 hours. No obligation.
+                </p>
               </div>
             </aside>
           </div>

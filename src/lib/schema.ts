@@ -52,12 +52,20 @@ export function generateLocalBusinessSchema() {
         opens: business.hours.opensAt,
         closes: business.hours.closesAt,
       },
+      {
+        "@type": "OpeningHoursSpecification",
+        dayOfWeek: "Saturday",
+        opens: "08:00",
+        closes: "15:00",
+      },
     ],
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: business.stats.reviewAverage,
       reviewCount: business.stats.reviewCount,
     },
+    paymentAccepted: "Cash, Credit Card, Check, Insurance",
+    currenciesAccepted: "USD",
     sameAs: [
       business.social.facebook,
       business.social.google,
@@ -267,6 +275,64 @@ export function generateCityServiceFAQSchema(city: City, service: Service) {
         },
       },
     ],
+  };
+}
+
+export function generateWebSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${business.website}/#website`,
+    name: business.name,
+    url: business.website,
+    publisher: {
+      "@type": "RoofingContractor",
+      "@id": `${business.website}/#business`,
+    },
+    potentialAction: {
+      "@type": "SearchAction",
+      target: `${business.website}/areas/{search_term_string}`,
+      "query-input": "required name=search_term_string",
+    },
+  };
+}
+
+export function generateArticleSchema(article: {
+  title: string;
+  description: string;
+  url: string;
+  publishedAt: string;
+  updatedAt?: string;
+  authorName?: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: article.title,
+    description: article.description,
+    url: `${business.website}${article.url}`,
+    datePublished: article.publishedAt,
+    ...(article.updatedAt && { dateModified: article.updatedAt }),
+    author: {
+      "@type": "Person",
+      name: article.authorName || business.name,
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": `${business.website}/#business`,
+      name: business.name,
+      logo: {
+        "@type": "ImageObject",
+        url: `${business.website}/logo.webp`,
+      },
+    },
+    ...(article.image && {
+      image: {
+        "@type": "ImageObject",
+        url: article.image,
+      },
+    }),
   };
 }
 

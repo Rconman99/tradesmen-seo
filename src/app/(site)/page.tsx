@@ -10,8 +10,8 @@ import { FEATURED_TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
 import type { SanityTestimonial } from "@/sanity/types";
 
 export const metadata: Metadata = {
-  title: `${business.shortName} | ${business.tagline} in Utah & Texas`,
-  description: business.description,
+  title: `Utah & Texas Roofing Contractor | ${business.shortName} — Free Estimates`,
+  description: `${business.shortName} provides expert roofing, storm damage repair, and maintenance across Utah & Texas. ${business.stats.reviewAverage}-star rated, ${business.stats.projectsCompleted.toLocaleString()}+ projects completed. Call ${business.phone} for a free inspection.`,
 };
 
 export default async function HomePage() {
@@ -62,30 +62,36 @@ export default async function HomePage() {
             />
 
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-black leading-[0.85] tracking-tight mb-8">
-              Your Trusted
+              Protect Your
               <br />
-              <span className="text-gradient">Roofing</span>
+              <span className="text-gradient">Roof.</span>
               <br />
-              Experts
+              Protect Your Home.
             </h1>
 
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl leading-relaxed font-light">
-              Expert roofing, storm damage repair, and maintenance for Utah &amp;
-              Texas since {business.founded}.
+            <p className="text-xl md:text-2xl text-gray-300 mb-4 max-w-xl leading-relaxed font-light">
+              Licensed roofing, storm damage repair, and maintenance across Utah &amp;
+              Texas &mdash; backed by {business.stats.projectsCompleted.toLocaleString()}+ completed projects.
             </p>
+
+            {/* Trust signals */}
+            <div className="flex items-center gap-3 mb-10 text-sm text-gray-400">
+              <div className="flex text-orange-400">{"★★★★★"}</div>
+              <span>{business.stats.reviewAverage}/5 from {business.stats.reviewCount}+ verified reviews</span>
+            </div>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-14">
               <Link
                 href="/contact"
                 className="bg-blue-600 text-white px-10 py-5 rounded-full font-bold text-lg text-center hover:bg-blue-700 transition-all shadow-2xl shadow-blue-600/30 hover:shadow-blue-600/50 hover:scale-105"
               >
-                Book Online
+                Get Your Free Estimate
               </Link>
               <a
                 href={`tel:${business.phoneTel}`}
                 className="bg-orange-500 text-white px-10 py-5 rounded-full font-bold text-lg text-center hover:bg-orange-600 transition-all shadow-2xl shadow-orange-500/30 hover:shadow-orange-500/50 hover:scale-105"
               >
-                Request a Bid
+                Call Now &mdash; {business.phone}
               </a>
             </div>
 

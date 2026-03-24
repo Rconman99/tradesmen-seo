@@ -31,13 +31,14 @@ export async function generateMetadata({
   const service = getServiceBySlug(serviceSlug);
   if (!city || !service) return {};
 
-  const title = `${service.name} in ${city.name}, ${city.stateAbbr}`;
+  const title = `${service.name} in ${city.name}, ${city.stateAbbr} | ${business.shortName}`;
   const description = `Professional ${service.name.toLowerCase()} in ${city.name}, ${city.stateAbbr}. ${service.description} Licensed & insured. Call ${business.phone} for a free estimate.`;
 
   return {
     title,
     description,
     openGraph: { title, description, type: "website" },
+    alternates: { canonical: `${business.website}/areas/${citySlug}/${serviceSlug}` },
   };
 }
 

@@ -32,6 +32,7 @@ export default async function sitemap({
         { url: `${baseUrl}/contact`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
         { url: `${baseUrl}/reviews`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
         { url: `${baseUrl}/blog`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.7 },
+        { url: `${baseUrl}/resources/storm-damage-guide`, lastModified: new Date(), changeFrequency: "monthly", priority: 0.8 },
       ];
 
     // ── Service hub pages ─────────────────────────
