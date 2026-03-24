@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { business } from "@/config/business";
+import { MobileNav } from "@/components/MobileNav";
 
 export function Header() {
   return (
@@ -67,23 +68,7 @@ export function Header() {
             </div>
 
             {/* Mobile */}
-            <div className="md:hidden flex items-center justify-between w-full py-3">
-              <Link href="/" className="flex-shrink-0">
-                <Image
-                  src="/logo.webp"
-                  alt={business.name}
-                  width={140}
-                  height={50}
-                  className="h-10 w-auto brightness-0 invert"
-                />
-              </Link>
-              <a
-                href={`tel:${business.phoneTel}`}
-                className="bg-orange-500 text-white px-5 py-2 rounded-full font-bold text-sm shadow-lg"
-              >
-                Call Now
-              </a>
-            </div>
+            <MobileNav />
           </div>
         </div>
       </nav>
