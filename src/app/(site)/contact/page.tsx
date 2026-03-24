@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { business } from "@/config/business";
-import { services } from "@/config/services";
+import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: `Contact Us — Free Estimates`,
@@ -25,111 +25,7 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Contact form */}
-            <div className="bg-white rounded-2xl p-8 border-2 border-gray-100 shadow-lg">
-              <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em] mb-3">Book Online</p>
-              <h2 className="text-2xl font-black mb-6">Request a Free Estimate</h2>
-              <form className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="firstName" className="block text-sm font-bold text-gray-700 mb-1">
-                      First Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="lastName" className="block text-sm font-bold text-gray-700 mb-1">
-                      Last Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label htmlFor="phone" className="block text-sm font-bold text-gray-700 mb-1">
-                    Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    required
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-sm font-bold text-gray-700 mb-1">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="city" className="block text-sm font-bold text-gray-700 mb-1">
-                    City / Location *
-                  </label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    required
-                    placeholder="e.g., Spokane, WA"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="service" className="block text-sm font-bold text-gray-700 mb-1">
-                    Service Needed
-                  </label>
-                  <select
-                    id="service"
-                    name="service"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
-                  >
-                    <option value="">Select a service...</option>
-                    {services.map((s) => (
-                      <option key={s.slug} value={s.slug}>{s.name}</option>
-                    ))}
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-1">
-                    Project Details
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    placeholder="Tell us about your project..."
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
-                  ></textarea>
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-blue-600 text-white px-8 py-5 rounded-full font-bold text-lg hover:bg-blue-700 transition-all shadow-xl shadow-blue-600/20 hover:scale-[1.02]"
-                >
-                  Request Free Estimate
-                </button>
-                <p className="text-xs text-gray-400 text-center">
-                  We typically respond within 24 hours.
-                </p>
-              </form>
-            </div>
+            <ContactForm />
 
             {/* Contact info */}
             <div className="space-y-5">
