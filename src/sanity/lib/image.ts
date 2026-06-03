@@ -1,8 +1,6 @@
 import createImageUrlBuilder from "@sanity/image-url";
 import type { SanityImageSource } from "@sanity/image-url";
-import { dataset, projectId } from "../env";
-
-const isSanityConfigured = /^[a-z0-9-]+$/.test(projectId);
+import { dataset, projectId, isSanityConfigured } from "../env";
 
 const builder = isSanityConfigured
   ? createImageUrlBuilder({ projectId, dataset })

@@ -1,8 +1,5 @@
 import { createClient, type QueryParams } from "next-sanity";
-import { apiVersion, dataset, projectId } from "../env";
-
-// Check if Sanity is configured with a real project ID
-const isSanityConfigured = /^[a-z0-9-]+$/.test(projectId);
+import { apiVersion, dataset, projectId, isSanityConfigured } from "../env";
 
 export const client = isSanityConfigured
   ? createClient({
