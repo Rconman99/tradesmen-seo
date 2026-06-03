@@ -1,19 +1,19 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { business } from "@/config/business";
-import { cities, getCitiesByState } from "@/config/cities";
+import { cities, getCitiesByCounty } from "@/config/cities";
 import { CTASection } from "@/components/CTASection";
 import { SchemaMarkup } from "@/components/SchemaMarkup";
 import { generateBreadcrumbSchema } from "@/lib/schema";
 
 export const metadata: Metadata = {
-  title: `Service Areas — Utah & Texas`,
-  description: `${business.shortName} serves ${cities.length}+ communities across Utah and Texas. Find ${business.category.toLowerCase()} services near you.`,
+  title: `Service Areas — King & Pierce County, WA`,
+  description: `${business.shortName} serves ${cities.length}+ communities across King and Pierce County, Washington. Find excavation and concrete services near you.`,
 };
 
 export default function AreasPage() {
-  const utCities = getCitiesByState("UT");
-  const txCities = getCitiesByState("TX");
+  const kingCities = getCitiesByCounty("King");
+  const pierceCities = getCitiesByCounty("Pierce");
 
   const CityCard = ({ city }: { city: (typeof cities)[number] }) => (
     <Link
@@ -52,25 +52,26 @@ export default function AreasPage() {
           <p className="text-blue-400 font-bold text-sm uppercase tracking-[0.2em] mb-3">Coverage</p>
           <h1 className="text-4xl md:text-6xl font-black tracking-tight mb-4">Service Areas</h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-            Professional {business.category.toLowerCase()} services
-            across {cities.length}+ communities in Utah and Texas.
+            Excavation and concrete services across {cities.length}+ communities
+            in King and Pierce County, Washington.
           </p>
         </div>
       </section>
 
-      {/* Utah */}
+      {/* King County */}
       <section className="py-20 -mt-10 relative z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-3 mb-3">
-            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">UT</span>
-            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Utah</p>
+            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">KING</span>
+            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">King County</p>
           </div>
           <p className="text-gray-500 mb-2">
-            {utCities.length} communities served &middot; License #{business.licenses.ut}
+            {kingCities.length} communities served &middot; based in Maple Valley
           </p>
           <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {utCities
+            {kingCities
+              .slice()
               .sort((a, b) => b.population - a.population)
               .map((city) => (
                 <CityCard key={city.slug} city={city} />
@@ -79,19 +80,20 @@ export default function AreasPage() {
         </div>
       </section>
 
-      {/* Texas */}
+      {/* Pierce County */}
       <section className="py-20 concrete-texture">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center gap-3 mb-3">
-            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">TX</span>
-            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Texas</p>
+            <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">PIERCE</span>
+            <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em]">Pierce County</p>
           </div>
           <p className="text-gray-500 mb-2">
-            {txCities.length} communities served &middot; License #{business.licenses.tx}
+            {pierceCities.length} communities served &middot; registered, bonded &amp; insured in WA
           </p>
           <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {txCities
+            {pierceCities
+              .slice()
               .sort((a, b) => b.population - a.population)
               .map((city) => (
                 <CityCard key={city.slug} city={city} />

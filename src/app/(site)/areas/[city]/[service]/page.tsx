@@ -107,7 +107,7 @@ export default async function CityServicePage({
 
             <p className="text-lg text-gray-300 mb-8 max-w-xl leading-relaxed">
               {service.description} Serving {city.name} and{" "}
-              {city.county} County since {business.founded}.
+              {city.county} County.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -185,12 +185,11 @@ export default async function CityServicePage({
                 <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
                 <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
                   <p>
-                    With {business.stats.yearsExperience}+ years of experience
-                    and{" "}
-                    {business.stats.projectsCompleted.toLocaleString()}+
-                    completed projects, {business.shortName} is the trusted
-                    choice for {service.name.toLowerCase()} in {city.name},{" "}
-                    {city.stateAbbr}.
+                    As a dual-trade contractor, {business.shortName} handles both
+                    the excavation and the concrete for {service.name.toLowerCase()}{" "}
+                    in {city.name}, {city.stateAbbr} — one crew preps the ground
+                    and places the concrete, so you have fewer contractors to
+                    coordinate.
                   </p>
                   <p>{city.localContent}</p>
                 </div>
@@ -214,16 +213,13 @@ export default async function CityServicePage({
                       value: `${city.name}, ${city.stateAbbr}`,
                     },
                     {
-                      label: "Experience",
-                      value: `${business.stats.yearsExperience}+ years`,
+                      label: "County",
+                      value: `${city.county} County`,
                     },
-                    { label: "Rating", value: `${business.stats.reviewAverage} ★` },
+                    { label: "Both Trades", value: "Excavation + Concrete" },
                     {
-                      label: `${city.stateAbbr} License`,
-                      value:
-                        city.stateAbbr === "UT"
-                          ? business.licenses.ut
-                          : business.licenses.tx,
+                      label: "Licensed",
+                      value: "WA · Bonded · Insured",
                     },
                   ].map((row) => (
                     <li
@@ -260,9 +256,9 @@ export default async function CityServicePage({
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { value: `${city.stateAbbr} Licensed`, label: "Licensed & Insured" },
-              { value: `${business.stats.yearsExperience}+ Yrs`, label: "Experience" },
-              { value: `${business.stats.reviewAverage} ★`, label: `${business.stats.reviewCount}+ Reviews` },
+              { value: "WA Licensed", label: "Bonded & Insured" },
+              { value: "2-in-1", label: "Excavation + Concrete" },
+              { value: `${city.county}`, label: "County Served" },
               { value: "Free", label: "Estimates Always" },
             ].map((item) => (
               <div key={item.label}>

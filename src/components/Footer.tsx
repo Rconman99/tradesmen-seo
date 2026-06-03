@@ -22,7 +22,7 @@ export function Footer() {
               className="h-16 w-auto mb-4"
             />
             <p className="text-sm leading-relaxed mb-5">
-              {business.tagline}. Serving Utah and Texas.
+              Excavation &amp; concrete — one crew, two trades. Serving {business.serviceAreaLabel}.
             </p>
             <a
               href={`tel:${business.phoneTel}`}
@@ -88,7 +88,7 @@ export function Footer() {
           {/* Hours */}
           <div>
             <h3 className="text-white font-bold text-sm uppercase tracking-wider mb-6">
-              Hours &amp; Licenses
+              Hours &amp; License
             </h3>
             <ul className="space-y-2 text-sm mb-6">
               <li className="flex justify-between">
@@ -106,12 +106,12 @@ export function Footer() {
             </ul>
             <div className="space-y-2 text-xs">
               <div className="flex items-center gap-2">
-                <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold">UT</span>
-                <span>{business.licenses.ut}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold">TX</span>
-                <span>{business.licenses.tx}</span>
+                <span className="bg-blue-600 text-white px-2 py-0.5 rounded-full font-bold">WA</span>
+                <span>
+                  {business.license.registration
+                    ? business.license.registration
+                    : "Registered, Bonded & Insured"}
+                </span>
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ const POSTS_PER_PAGE = 10;
 
 export const metadata: Metadata = {
   title: "Blog — Tips, News & Project Updates",
-  description: `Read the latest from ${business.shortName}. Tips on roofing, storm damage, and industry news for Utah & Texas homeowners.`,
+  description: `Read the latest from ${business.shortName}. Tips on excavation, site prep, drainage, and concrete for King & Pierce County homeowners.`,
 };
 
 export default async function BlogPage({

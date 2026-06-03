@@ -62,13 +62,15 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
             </h1>
 
             <p className="text-lg text-gray-300 mb-6 max-w-xl leading-relaxed">
-              Trusted {business.category.toLowerCase()} for {city.name} homeowners and
-              businesses since {business.founded}. Licensed, insured, free estimates.
+              Excavation and concrete for {city.name} homeowners and builders —
+              one crew handles the dirt work and the pour. Registered, bonded,
+              and insured in Washington, with free on-site estimates.
             </p>
 
             <div className="flex items-center gap-3 mb-8">
-              <div className="flex text-orange-400 text-xl">{"★★★★★"}</div>
-              <span className="text-gray-300 font-medium">{business.stats.reviewAverage}/5 ({business.stats.reviewCount} reviews)</span>
+              <span className="bg-white/10 border border-white/20 text-white text-sm font-semibold px-4 py-2 rounded-full">
+                🤝 Excavation + Concrete · One Crew
+              </span>
             </div>
 
             <div className="flex flex-col sm:flex-row gap-4">
@@ -138,9 +140,9 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
                 <ul className="space-y-4 text-sm">
                   {[
                     { label: "Zip Code(s)", value: city.zip.join(", ") },
-                    { label: "County", value: city.county },
+                    { label: "County", value: `${city.county} County` },
                     { label: "State", value: city.state },
-                    { label: `${city.stateAbbr} License`, value: city.stateAbbr === "UT" ? business.licenses.ut : business.licenses.tx },
+                    { label: "Licensed", value: "WA · Bonded · Insured" },
                   ].map((row) => (
                     <li key={row.label} className="flex justify-between items-center pb-4 border-b border-gray-100 last:border-0 last:pb-0">
                       <span className="text-gray-400">{row.label}</span>
@@ -167,9 +169,9 @@ export default async function CityPage({ params }: { params: Promise<{ city: str
         <div className="max-w-5xl mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
-              { value: `${city.stateAbbr} Licensed`, label: "Licensed & Insured" },
-              { value: `${business.stats.yearsExperience}+ Yrs`, label: "Experience" },
-              { value: `${business.stats.reviewAverage} ★`, label: `${business.stats.reviewCount}+ Reviews` },
+              { value: "WA Licensed", label: "Bonded & Insured" },
+              { value: "2-in-1", label: "Excavation + Concrete" },
+              { value: `${city.county}`, label: "County Served" },
               { value: "Free", label: "Estimates Always" },
             ].map((item) => (
               <div key={item.label}>

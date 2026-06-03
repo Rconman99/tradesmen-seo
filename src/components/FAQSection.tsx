@@ -2,31 +2,34 @@ import { business } from "@/config/business";
 import { City } from "@/config/cities";
 
 export function FAQSection({ city }: { city: City }) {
-  const serviceName = business.category.toLowerCase();
+  const licenseText = business.license.registration
+    ? `WA registration #${business.license.registration}`
+    : "registered, bonded, and insured in Washington";
+
   const faqs = [
     {
-      q: `How much does ${serviceName} cost in ${city.name}?`,
-      a: `Costs in ${city.name}, ${city.stateAbbr} vary by roof size, materials, and project scope. Call ${business.phone} for a free inspection and estimate.`,
+      q: `How much does excavation or concrete work cost in ${city.name}?`,
+      a: `Costs in ${city.name}, ${city.stateAbbr} depend on the job — driveways, footing or French drains, and lot grading or site prep all vary with access, soil, and scope. Call ${business.phone} for a free on-site estimate.`,
     },
     {
       q: `Do you offer free estimates in ${city.name}?`,
-      a: `Yes! Free on-site estimates for all projects in ${city.name} and surrounding ${city.county} County. Call ${business.phone} to schedule.`,
+      a: `Yes! Free on-site estimates for excavation and concrete projects in ${city.name} and the surrounding ${city.county} County area. Call ${business.phone} to schedule.`,
     },
     {
       q: `Are you licensed in ${city.state}?`,
-      a: `Fully licensed and insured. ${city.stateAbbr === "UT" ? `UT License #${business.licenses.ut}` : `TX License #${business.licenses.tx}`}.`,
+      a: `${business.shortName} is ${licenseText}.`,
     },
     {
-      q: `What areas near ${city.name} do you serve?`,
-      a: `We serve ${city.name} and all surrounding ${city.county} County communities. Contact us to confirm availability.`,
+      q: `Do I need a permit for grading or concrete in ${city.name}?`,
+      a: `Many clearing, grading, and driveway-approach projects require a permit from the city, and critical-areas rules can apply near slopes, wetlands, or streams. We know the local process and handle permits as needed.`,
     },
     {
-      q: `Do you help with insurance claims in ${city.name}?`,
-      a: `Yes! We have extensive experience with insurance claims for hail and wind damage. We document damage, meet with adjusters, and guide you through the entire process.`,
+      q: `Do you do both the excavation and the concrete?`,
+      a: `Yes — that's our advantage. One crew handles the dirt work (grading, subgrade prep, drainage) and the concrete, so you don't have to coordinate two separate contractors.`,
     },
     {
       q: `How fast can you start?`,
-      a: `Typically 3\u20135 business days. For storm damage emergencies in ${city.name}, call ${business.phone} for same-day response.`,
+      a: `Scheduling depends on the season and the size of the job. Call ${business.phone} and we'll give you a realistic start window with your free estimate.`,
     },
   ];
 

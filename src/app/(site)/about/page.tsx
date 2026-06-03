@@ -5,8 +5,12 @@ import { CTASection } from "@/components/CTASection";
 
 export const metadata: Metadata = {
   title: `About ${business.shortName}`,
-  description: `Learn about ${business.shortName}. ${business.stats.yearsExperience}+ years of ${business.category.toLowerCase()} experience serving Utah and Texas.`,
+  description: `Learn about ${business.name} — a dual-trade excavation and concrete contractor serving Maple Valley and the King & Pierce County area of Washington.`,
 };
+
+const licenseText = business.license.registration
+  ? `WA Registration #${business.license.registration}`
+  : "Registered, Bonded & Insured in Washington";
 
 export default function AboutPage() {
   return (
@@ -19,8 +23,8 @@ export default function AboutPage() {
             About <span className="text-gradient">{business.shortName}</span>
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-            {business.tagline} — serving Utah and Texas
-            since {business.founded}.
+            Excavation and concrete under one roof — serving Maple Valley and the
+            greater King &amp; Pierce County area of Washington.
           </p>
         </div>
       </section>
@@ -31,10 +35,10 @@ export default function AboutPage() {
           <div className="bg-white rounded-2xl shadow-xl border-2 border-gray-100 p-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
-                { value: `${business.stats.yearsExperience}+`, label: "Years Experience" },
-                { value: `${business.stats.projectsCompleted.toLocaleString()}+`, label: "Projects Completed" },
-                { value: `${business.stats.reviewAverage} ★`, label: `${business.stats.reviewCount}+ Reviews` },
-                { value: "2", label: "State Licenses" },
+                { value: "2-in-1", label: "Excavation + Concrete" },
+                { value: "King & Pierce", label: "Counties Served" },
+                { value: "WA", label: "Licensed • Bonded • Insured" },
+                { value: "Free", label: "On-Site Estimates" },
               ].map((item) => (
                 <div key={item.label}>
                   <div className="text-3xl md:text-4xl font-black text-blue-600">{item.value}</div>
@@ -50,45 +54,46 @@ export default function AboutPage() {
       <section className="py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em] mb-3">Our Story</p>
-          <h2 className="text-3xl font-black mb-2">Built on Quality & Trust</h2>
+          <h2 className="text-3xl font-black mb-2">Two Trades, One Crew</h2>
           <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
           <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
             <p>
-              Founded in {business.founded}, {business.name} has grown to become
-              one of the most trusted {business.category.toLowerCase()}{" "}
-              companies across Utah and Texas.
-              With {business.stats.yearsExperience}+ years of experience and{" "}
-              {business.stats.projectsCompleted.toLocaleString()}+ completed
-              projects, we bring unmatched expertise to every job.
+              {business.name} is a dual-trade contractor based in Maple Valley,
+              Washington. We do something most contractors don&apos;t: we handle
+              both the dirt work and the concrete. From trenching, grading, and
+              site preparation to concrete driveways, patios, slabs, and
+              sidewalks, the same crew carries a project from the first cut to the
+              finished pour.
             </p>
             <p>
-              We are fully licensed and insured in both Utah and Texas.
-              Our commitment to professionalism and safety means you can trust
-              us with your project.
+              That matters because, in Puget Sound soils, a concrete slab is only
+              as good as the ground beneath it. When one team prepares the
+              subgrade and places the concrete, the grading, drainage, and pour
+              are built to work together — and you have fewer contractors to hire
+              and coordinate.
+            </p>
+            <p>
+              We serve homeowners and builders across King and Pierce County, and
+              we&apos;re {licenseText.toLowerCase()}.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Licenses */}
+      {/* Credentials */}
       <section className="py-20 concrete-texture">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <p className="text-blue-600 font-bold text-sm uppercase tracking-[0.2em] mb-3">Credentials</p>
-          <h2 className="text-3xl font-black mb-2">Licensed & Insured</h2>
+          <h2 className="text-3xl font-black mb-2">Licensed &amp; Insured</h2>
           <div className="w-16 h-1 bg-blue-600 rounded-full mb-10" />
           <div className="grid sm:grid-cols-2 gap-5">
-            {[
-              { state: "UT", label: "Utah License", value: business.licenses.ut },
-              { state: "TX", label: "Texas License", value: business.licenses.tx },
-            ].map((lic) => (
-              <div key={lic.state} className="bg-white rounded-2xl p-6 border-2 border-gray-100">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">{lic.state}</span>
-                  <h3 className="font-bold">{lic.label}</h3>
-                </div>
-                <p className="text-gray-500 font-mono text-sm">{lic.value}</p>
+            <div className="bg-white rounded-2xl p-6 border-2 border-gray-100">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="bg-blue-600 text-white px-3 py-1 rounded-full font-bold text-xs">WA</span>
+                <h3 className="font-bold">Washington Contractor</h3>
               </div>
-            ))}
+              <p className="text-gray-500 text-sm">{licenseText}</p>
+            </div>
             <div className="bg-white rounded-2xl p-6 border-2 border-gray-100">
               <div className="flex items-center gap-3 mb-3">
                 <span className="bg-green-600 text-white px-3 py-1 rounded-full font-bold text-xs">✓</span>
@@ -103,6 +108,13 @@ export default function AboutPage() {
               </div>
               <p className="text-gray-500 text-sm">Full workers compensation coverage</p>
             </div>
+            <div className="bg-white rounded-2xl p-6 border-2 border-gray-100">
+              <div className="flex items-center gap-3 mb-3">
+                <span className="bg-green-600 text-white px-3 py-1 rounded-full font-bold text-xs">✓</span>
+                <h3 className="font-bold">Permits Handled</h3>
+              </div>
+              <p className="text-gray-500 text-sm">We handle clearing, grading, and right-of-way permits as needed</p>
+            </div>
           </div>
         </div>
       </section>
@@ -116,15 +128,14 @@ export default function AboutPage() {
           <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
             <p>
               Every project starts with a free on-site estimate. We believe in
-              transparent pricing, clear communication, and quality workmanship.
-              Our {business.stats.reviewAverage}-star rating across{" "}
-              {business.stats.reviewCount}+ reviews speaks to the level of
-              service our customers expect and receive.
+              transparent pricing, clear communication, and quality workmanship —
+              we walk the site, talk through the ground conditions, and quote it
+              straight.
             </p>
             <p>
-              We serve communities across Utah and Texas, from Park City and
-              Salt Lake City to the Dallas-Fort Worth metroplex.
-              No matter where your project is located, our team will be there.
+              We serve communities across King and Pierce County, from Maple
+              Valley, Covington, and Kent to Tacoma, Puyallup, and beyond. No
+              matter where your project is, our team will be there.
             </p>
           </div>
           <div className="mt-10 flex flex-col sm:flex-row gap-4">

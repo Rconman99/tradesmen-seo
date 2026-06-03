@@ -64,7 +64,7 @@ export default async function OGImage() {
           {business.tagline}
         </div>
 
-        {/* Stats row */}
+        {/* Highlights row */}
         <div
           style={{
             display: "flex",
@@ -72,62 +72,30 @@ export default async function OGImage() {
             alignItems: "center",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ fontSize: 36, fontWeight: 800, color: "#3b82f6", display: "flex" }}>
-              {business.stats.yearsExperience}+
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ fontSize: 34, fontWeight: 800, color: "#3b82f6", display: "flex" }}>
+              Excavation
             </div>
             <div style={{ fontSize: 14, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", display: "flex" }}>
-              Years
+              Site Prep & Grading
             </div>
           </div>
-          <div
-            style={{
-              width: "1px",
-              height: "48px",
-              background: "#334155",
-              display: "flex",
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ fontSize: 36, fontWeight: 800, color: "#3b82f6", display: "flex" }}>
-              {business.stats.projectsCompleted.toLocaleString()}+
+          <div style={{ width: "1px", height: "48px", background: "#334155", display: "flex" }} />
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ fontSize: 34, fontWeight: 800, color: "#3b82f6", display: "flex" }}>
+              Concrete
             </div>
             <div style={{ fontSize: 14, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", display: "flex" }}>
-              Projects
+              Driveways · Slabs · Patios
             </div>
           </div>
-          <div
-            style={{
-              width: "1px",
-              height: "48px",
-              background: "#334155",
-              display: "flex",
-            }}
-          />
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
-            <div style={{ fontSize: 36, fontWeight: 800, color: "#f97316", display: "flex" }}>
-              {business.stats.reviewAverage} ★
+          <div style={{ width: "1px", height: "48px", background: "#334155", display: "flex" }} />
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+            <div style={{ fontSize: 34, fontWeight: 800, color: "#f97316", display: "flex" }}>
+              Free
             </div>
             <div style={{ fontSize: 14, color: "#64748b", textTransform: "uppercase", letterSpacing: "0.1em", display: "flex" }}>
-              {business.stats.reviewCount} Reviews
+              On-Site Estimates
             </div>
           </div>
         </div>

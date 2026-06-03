@@ -27,21 +27,9 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: `${service.name} in ${city.name} | Free Estimate`,
-    description: `Get a free estimate for ${service.name.toLowerCase()} in ${city.name}, ${city.stateAbbr}. ${business.stats.reviewAverage}★ rated, ${business.stats.projectsCompleted.toLocaleString()}+ projects. Licensed & insured. Call ${business.phone}.`,
+    description: `Get a free estimate for ${service.name.toLowerCase()} in ${city.name}, ${city.stateAbbr}. Excavation and concrete by one crew — registered, bonded & insured in WA. Call ${business.phone}.`,
     robots: { index: false, follow: false },
   };
-}
-
-function Stars({ rating }: { rating: number }) {
-  const full = Math.floor(rating);
-  const hasHalf = rating % 1 >= 0.5;
-  return (
-    <span className="text-yellow-400 text-2xl" aria-label={`${rating} out of 5 stars`}>
-      {"★".repeat(full)}
-      {hasHalf && "½"}
-      {"☆".repeat(5 - full - (hasHalf ? 1 : 0))}
-    </span>
-  );
 }
 
 export default async function LandingPage({ params }: PageProps) {
@@ -51,10 +39,9 @@ export default async function LandingPage({ params }: PageProps) {
 
   if (!service || !city) notFound();
 
-  const license =
-    city.stateAbbr === "UT" ? business.licenses.ut : business.licenses.tx;
-  const yearsInBusiness =
-    new Date().getFullYear() - business.founded;
+  const licenseText = business.license.registration
+    ? `WA Registration #${business.license.registration}`
+    : "Registered, Bonded & Insured in Washington";
 
   return (
     <div className="min-h-screen bg-white">
@@ -62,9 +49,8 @@ export default async function LandingPage({ params }: PageProps) {
       <section className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white px-4 py-12 md:py-16">
         <div className="max-w-2xl mx-auto text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
-            <Stars rating={business.stats.reviewAverage} />
-            <span className="text-sm text-slate-300">
-              {business.stats.reviewAverage} / 5 ({business.stats.reviewCount} reviews)
+            <span className="text-sm font-semibold bg-white/10 border border-white/20 px-4 py-1.5 rounded-full text-white">
+              🤝 Excavation + Concrete · One Crew
             </span>
           </div>
 
@@ -91,7 +77,7 @@ export default async function LandingPage({ params }: PageProps) {
               href="#lead-form"
               className="inline-flex items-center justify-center rounded-lg bg-[var(--brand-blue)] px-8 py-4 text-lg font-bold text-white shadow-lg hover:brightness-110 transition"
             >
-              Get Your Free Inspection
+              Get Your Free Estimate
             </a>
           </div>
         </div>
@@ -101,24 +87,16 @@ export default async function LandingPage({ params }: PageProps) {
       <section className="bg-slate-50 border-y border-slate-200 px-4 py-8">
         <div className="max-w-3xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           <div>
-            <p className="text-2xl md:text-3xl font-black text-[var(--brand-blue)]">
-              {yearsInBusiness}+
-            </p>
-            <p className="text-sm text-slate-600 font-medium">Years Experience</p>
+            <p className="text-2xl md:text-3xl font-black text-[var(--brand-blue)]">2-in-1</p>
+            <p className="text-sm text-slate-600 font-medium">Excavation + Concrete</p>
           </div>
           <div>
-            <p className="text-2xl md:text-3xl font-black text-[var(--brand-blue)]">
-              {business.stats.projectsCompleted.toLocaleString()}+
-            </p>
-            <p className="text-sm text-slate-600 font-medium">Projects Done</p>
+            <p className="text-2xl md:text-3xl font-black text-[var(--brand-blue)]">{city.county}</p>
+            <p className="text-sm text-slate-600 font-medium">County Served</p>
           </div>
           <div>
-            <p className="text-2xl md:text-3xl font-black text-[var(--brand-orange)]">
-              {business.stats.reviewAverage}★
-            </p>
-            <p className="text-sm text-slate-600 font-medium">
-              {business.stats.reviewCount} Reviews
-            </p>
+            <p className="text-2xl md:text-3xl font-black text-[var(--brand-orange)]">Free</p>
+            <p className="text-sm text-slate-600 font-medium">On-Site Estimates</p>
           </div>
           <div>
             <p className="text-2xl md:text-3xl font-black text-green-600">✓</p>
@@ -126,7 +104,7 @@ export default async function LandingPage({ params }: PageProps) {
           </div>
         </div>
         <p className="text-center text-xs text-slate-400 mt-4">
-          {city.stateAbbr} License #{license}
+          {licenseText}
         </p>
       </section>
 
@@ -153,7 +131,7 @@ export default async function LandingPage({ params }: PageProps) {
       <section id="lead-form" className="bg-slate-50 px-4 py-12">
         <div className="max-w-md mx-auto">
           <h2 className="text-2xl font-bold text-slate-900 mb-2 text-center">
-            Get Your Free Inspection
+            Get Your Free Estimate
           </h2>
           <p className="text-slate-600 text-center mb-6">
             Fill out the form below and we&apos;ll call you to schedule.

@@ -4,7 +4,7 @@ import { services } from "@/config/services";
 
 export const metadata: Metadata = {
   title: `Contact Us — Free Estimates`,
-  description: `Contact ${business.shortName} for a free estimate. Call ${business.phone} or fill out our online form. Serving Utah and Texas.`,
+  description: `Contact ${business.shortName} for a free estimate. Call ${business.phone} or fill out our online form. Serving the King & Pierce County area of Washington.`,
 };
 
 export default function ContactPage() {
@@ -87,7 +87,7 @@ export default function ContactPage() {
                     id="city"
                     name="city"
                     required
-                    placeholder="e.g., Heber City, UT"
+                    placeholder="e.g., Maple Valley, WA"
                     className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-600 focus:border-blue-600 outline-none transition-colors"
                   />
                 </div>
@@ -159,27 +159,27 @@ export default function ContactPage() {
               </div>
 
               <div className="bg-white rounded-2xl p-6 border-2 border-gray-100">
-                <h3 className="font-bold text-lg mb-2">Location</h3>
+                <h3 className="font-bold text-lg mb-2">Service Area</h3>
                 <p className="text-gray-600">
-                  {business.address.street}
-                  <br />
-                  {business.address.city}, {business.address.state}{" "}
+                  Based in {business.address.city}, {business.address.state}{" "}
                   {business.address.zip}
+                  <br />
+                  Serving {business.serviceAreaLabel}
                 </p>
               </div>
 
               <div className="bg-white rounded-2xl p-6 border-2 border-gray-100">
-                <h3 className="font-bold text-lg mb-3">Licenses</h3>
+                <h3 className="font-bold text-lg mb-3">Licensed &amp; Insured</h3>
                 <div className="space-y-2">
                   <div className="flex items-center gap-3">
-                    <span className="bg-blue-600 text-white px-2.5 py-0.5 rounded-full font-bold text-xs">UT</span>
-                    <span className="text-gray-600 text-sm font-mono">{business.licenses.ut}</span>
+                    <span className="bg-blue-600 text-white px-2.5 py-0.5 rounded-full font-bold text-xs">WA</span>
+                    <span className="text-gray-600 text-sm">
+                      {business.license.registration
+                        ? `Registration #${business.license.registration}`
+                        : "Registered Contractor"}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="bg-blue-600 text-white px-2.5 py-0.5 rounded-full font-bold text-xs">TX</span>
-                    <span className="text-gray-600 text-sm font-mono">{business.licenses.tx}</span>
-                  </div>
-                  <p className="text-sm text-gray-400 mt-2">Fully Bonded &amp; Insured</p>
+                  <p className="text-sm text-gray-400 mt-2">Bonded &amp; Insured in Washington</p>
                 </div>
               </div>
 

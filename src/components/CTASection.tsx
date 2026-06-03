@@ -11,7 +11,7 @@ export function CTASection({ title, subtitle, cityName }: CTASectionProps) {
   const heading =
     title ||
     (cityName
-      ? `Need ${business.category} in ${cityName}?`
+      ? `Need Excavation or Concrete Work in ${cityName}?`
       : `Ready to Get Your Project Started?`);
 
   const sub =

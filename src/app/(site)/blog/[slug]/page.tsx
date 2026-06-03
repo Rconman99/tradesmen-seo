@@ -407,10 +407,10 @@ export default async function BlogPostPage({
 
           {/* CTA card */}
           <div className="mt-12 bg-blue-600 rounded-2xl p-8 text-white text-center">
-            <h2 className="text-2xl font-black mb-3">Need Roofing Work Done?</h2>
+            <h2 className="text-2xl font-black mb-3">Need Excavation or Concrete Work Done?</h2>
             <p className="text-blue-100 mb-6 max-w-lg mx-auto">
-              Get a free estimate from {business.shortName}. Licensed &amp;
-              insured across Utah &amp; Texas.
+              Get a free estimate from {business.shortName}. Registered, bonded &amp;
+              insured in Washington — serving King &amp; Pierce County.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

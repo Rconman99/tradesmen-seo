@@ -10,7 +10,7 @@ import type { SanityGalleryImage } from "@/sanity/types";
 
 export const metadata: Metadata = {
   title: "Project Gallery",
-  description: `Browse completed projects from ${business.shortName}. See our roofing, storm damage repair, and maintenance work across Utah and Texas.`,
+  description: `Browse completed projects from ${business.shortName}. See our excavation, site prep, and concrete work across King & Pierce County, Washington.`,
 };
 
 export default async function GalleryPage() {
@@ -36,7 +36,7 @@ export default async function GalleryPage() {
             Project Gallery
           </h1>
           <p className="text-lg text-gray-300 max-w-2xl leading-relaxed">
-            Browse our completed projects across Utah and Texas.
+            Browse our completed excavation and concrete projects across King and Pierce County.
           </p>
         </div>
       </section>

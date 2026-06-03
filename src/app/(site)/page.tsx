@@ -10,7 +10,7 @@ import { FEATURED_TESTIMONIALS_QUERY } from "@/sanity/lib/queries";
 import type { SanityTestimonial } from "@/sanity/types";
 
 export const metadata: Metadata = {
-  title: `${business.shortName} | ${business.tagline} in Utah & Texas`,
+  title: `${business.name} | Excavation & Concrete Contractor in Maple Valley, WA`,
   description: business.description,
 };
 
@@ -62,16 +62,17 @@ export default async function HomePage() {
             />
 
             <h1 className="text-5xl sm:text-6xl md:text-8xl font-black leading-[0.85] tracking-tight mb-8">
-              Your Trusted
+              Excavation
               <br />
-              <span className="text-gradient">Roofing</span>
+              <span className="text-gradient">&amp; Concrete</span>
               <br />
-              Experts
+              Contractor
             </h1>
 
             <p className="text-xl md:text-2xl text-gray-300 mb-10 max-w-xl leading-relaxed font-light">
-              Expert roofing, storm damage repair, and maintenance for Utah &amp;
-              Texas since {business.founded}.
+              Site prep, grading, trenching, and quality concrete flatwork for
+              Maple Valley and the greater King &amp; Pierce County area. One crew,
+              two trades.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 mb-14">
@@ -92,9 +93,9 @@ export default async function HomePage() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-6 max-w-lg">
               {[
-                { value: `${business.stats.yearsExperience}+`, label: "Years Experience" },
-                { value: `${(business.stats.projectsCompleted / 1000).toFixed(1)}K+`, label: "Projects Done" },
-                { value: `${business.stats.reviewAverage}`, label: "Star Rating" },
+                { value: "2-in-1", label: "Excavation + Concrete" },
+                { value: "King & Pierce", label: "Counties Served" },
+                { value: "Free", label: "On-Site Estimates" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <div className="text-3xl md:text-4xl font-black text-white">{stat.value}</div>
@@ -165,25 +166,25 @@ export default async function HomePage() {
               {
                 icon: "🛡️",
                 title: "Licensed & Insured",
-                desc: `UT #${business.licenses.ut} · TX #${business.licenses.tx}. Fully bonded and insured for your protection.`,
+                desc: "Registered, bonded, and insured in Washington for your protection.",
                 color: "blue",
               },
               {
                 icon: "💰",
                 title: "Free Estimates",
-                desc: "No surprises, no hidden fees. We quote it right the first time, every time.",
+                desc: "No surprises, no hidden fees. We walk the site and quote it right.",
                 color: "green",
               },
               {
-                icon: "⚡",
-                title: `${business.stats.yearsExperience}+ Years`,
-                desc: `Trusted since ${business.founded}. Thousands of projects completed across the region.`,
+                icon: "🤝",
+                title: "Two Trades, One Crew",
+                desc: "We handle the excavation AND the concrete — fewer contractors to coordinate, smoother projects.",
                 color: "orange",
               },
               {
-                icon: "⭐",
-                title: `${business.stats.reviewAverage} Star Rating`,
-                desc: `${business.stats.reviewCount}+ verified reviews from real customers. Results speak for themselves.`,
+                icon: "📍",
+                title: "Local & Owner-Operated",
+                desc: "Based in Maple Valley, serving King and Pierce County. We know the ground and the permit process here.",
                 color: "yellow",
               },
             ].map((item) => (
@@ -269,8 +270,8 @@ export default async function HomePage() {
             </h2>
             <div className="w-16 h-1 bg-blue-600 rounded-full mx-auto mt-4" />
             <p className="text-gray-500 mt-4 max-w-xl mx-auto">
-              From Heber City to Salt Lake City, Park City to Frisco &mdash;
-              we cover Utah and Texas.
+              From Maple Valley and Kent to Tacoma and Puyallup &mdash;
+              we cover King and Pierce County.
             </p>
           </div>
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">

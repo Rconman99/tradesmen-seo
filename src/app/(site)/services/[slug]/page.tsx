@@ -23,7 +23,7 @@ export async function generateMetadata({
 
   return {
     title: `${service.name} Services`,
-    description: `Professional ${service.name.toLowerCase()} services across Utah and Texas. ${service.description} Call ${business.phone} for a free estimate.`,
+    description: `Professional ${service.name.toLowerCase()} across the King & Pierce County area of Washington. ${service.description} Call ${business.phone} for a free estimate.`,
   };
 }
 
@@ -113,17 +113,17 @@ export default async function ServicePage({
                 <div className="w-16 h-1 bg-blue-600 rounded-full mb-8" />
                 <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
                   <p>
-                    With {business.stats.yearsExperience}+ years of experience
-                    and {business.stats.projectsCompleted.toLocaleString()}+
-                    completed projects, {business.shortName} is the trusted
-                    choice for {service.name.toLowerCase()} across Utah and
-                    Texas.
+                    As a dual-trade contractor, {business.shortName} handles both
+                    the excavation and the concrete for your{" "}
+                    {service.name.toLowerCase()} — so the subgrade is prepped
+                    right and the pour is done by the same crew, with fewer
+                    contractors to coordinate.
                   </p>
                   <p>
-                    We use premium materials and proven techniques for lasting
-                    results on every project. Our team is fully licensed and insured,
-                    and we provide free inspections and estimates so you know exactly
-                    what to expect before work begins.
+                    We serve homeowners and builders across King and Pierce
+                    County. Our team is registered, bonded, and insured in
+                    Washington, and we provide a free on-site estimate so you
+                    know exactly what to expect before work begins.
                   </p>
                 </div>
               </div>
@@ -135,10 +135,9 @@ export default async function ServicePage({
                 <h3 className="font-bold text-lg mb-5">Quick Facts</h3>
                 <ul className="space-y-4 text-sm">
                   {[
-                    { label: "Experience", value: `${business.stats.yearsExperience}+ years` },
-                    { label: "Rating", value: `${business.stats.reviewAverage} ★` },
-                    { label: "UT License", value: business.licenses.ut },
-                    { label: "TX License", value: business.licenses.tx },
+                    { label: "Service Area", value: "King & Pierce" },
+                    { label: "Both Trades", value: "Excavation + Concrete" },
+                    { label: "Licensed", value: "WA · Bonded · Insured" },
                   ].map((row) => (
                     <li key={row.label} className="flex justify-between items-center pb-4 border-b border-gray-100 last:border-0 last:pb-0">
                       <span className="text-gray-400">{row.label}</span>
