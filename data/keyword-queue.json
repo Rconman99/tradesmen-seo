@@ -1,5 +1,4 @@
 {
-  "note": "All keywords published as of 2026-06-24. Add new keywords with status: pending to resume generation.",
   "keywords": [
     { "keyword": "concrete cutting Spokane", "status": "published", "published_date": "2026-04-15", "slug": "concrete-cutting-spokane" },
     { "keyword": "core drilling Spokane WA", "status": "published", "published_date": "2026-04-22", "slug": "core-drilling-spokane-wa" },
@@ -10,6 +9,7 @@
     { "keyword": "concrete cutting Coeur d'Alene", "status": "published", "published_date": "2026-05-27", "slug": "concrete-cutting-coeur-dalene" },
     { "keyword": "concrete cutting near me", "status": "published", "published_date": "2026-06-03", "slug": "concrete-cutting-near-me" },
     { "keyword": "concrete demolition Spokane", "status": "published", "published_date": "2026-06-10", "slug": "concrete-demolition-spokane" },
-    { "keyword": "slab sawing Spokane WA", "status": "published", "published_date": "2026-06-17", "slug": "slab-sawing-spokane-wa" }
+    { "keyword": "slab sawing Spokane WA", "status": "published", "published_date": "2026-06-17", "slug": "slab-sawing-spokane-wa" },
+    { "keyword": "wire sawing Spokane WA", "status": "published", "published_date": "2026-07-22", "slug": "wire-sawing-spokane-wa" }
   ]
 }
